@@ -2,6 +2,7 @@
 
 ## 1. Cấu trúc thư mục dự án
 
+````markdown
 FINDU/
 │
 ├── app/ # Thư mục chính của ứng dụng
@@ -25,7 +26,7 @@ FINDU/
 │ └── uploads/ # File người dùng tải lên (ảnh đại diện,...)
 │
 └── index.php # File khởi động ứng dụng (Gateway)
-
+````
 ### 💡 Ghi chú
 - Cấu trúc theo mô hình **MVC (Model - View - Controller)**.
 - Mục tiêu: tách biệt rõ ràng giữa **xử lý logic**, **giao diện**, và **dữ liệu**.
