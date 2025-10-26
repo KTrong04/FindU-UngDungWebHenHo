@@ -1,0 +1,68 @@
+body
+{
+    background-color: #f2f4f7;
+}
+.content
+{
+    width: auto;
+    height: auto;
+    margin-top: 65px;
+    text-align: center;
+}
+
+.box-post-baiViet
+{
+    width: 50%;
+    height: auto;
+    margin: auto;
+    margin-top: 20px;  
+    border: none;  
+    box-shadow: 0px 0px 3px rgb(0, 0, 0, .2);
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    transition: height 0.6s ease-in-out;
+    overflow: hidden;
+    padding: 10px 0px ;
+}
+
+.box-post-baiViet .textarea-post-baiViet
+{
+    width: 80%;
+    height: auto;
+    border: none;
+    resize: none;
+    font-size: 16px;
+    outline: none;
+    background-color: rgba(87, 87, 87, 0.1);
+    border-radius: 10px;
+    padding: 10px 15px;
+}
+
+
+.box-post-baiViet .input-hashtag-post-baiViet
+{
+    width: 80%;
+    height: auto;
+    border: none;
+    font-size: 14px;
+    outline: none;
+    margin-top: 10px;
+}
+
+.nav-post-baiViet 
+{
+    display: none;
+}
+
+.box-post-baiViet .textarea-post-baiViet:focus::placeholder, .box-post-baiViet .input-hashtag-post-baiViet:focus::placeholder
+{
+    color: transparent;
+}
+
+.box-post-baiViet.active {
+    height: auto !important;
+}
+
+.nav-post-baiViet.active {
+    display: block;
+}
