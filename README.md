@@ -1,7 +1,9 @@
-# 🩷 FindU - ỨNG DỤNG WEB HẸN HÒ
+# 🩷FindU - ỨNG DỤNG WEB HẸN HÒ
+
 
 ## 1. Cấu trúc thư mục dự án
 
+````markdown
 FINDU/
 │
 ├── app/ # Thư mục chính của ứng dụng
@@ -25,12 +27,13 @@ FINDU/
 │ └── uploads/ # File người dùng tải lên (ảnh đại diện,...)
 │
 └── index.php # File khởi động ứng dụng (Gateway)
-
+````
 ### 💡 Ghi chú
 - Cấu trúc theo mô hình **MVC (Model - View - Controller)**.
 - Mục tiêu: tách biệt rõ ràng giữa **xử lý logic**, **giao diện**, và **dữ liệu**.
 
 ## 2. CSDL (code SQL)
+````markdown
 CREATE TABLE PhongBan (
     maPB INT AUTO_INCREMENT PRIMARY KEY,
     tenPB VARCHAR(100)
@@ -112,6 +115,7 @@ CREATE TABLE BaoCao (
     FOREIGN KEY (maTV) REFERENCES ThanhVien(maTV),
     FOREIGN KEY (maNV) REFERENCES NhanVien(maNV)
 );
+````
 
 ### 💡 Ghi chú: Cách tạo CSDL MySQL trong xampp
 - B1: Tạo CSDL với tên là: findu_db
@@ -119,6 +123,8 @@ CREATE TABLE BaoCao (
 - B3: Copy code SQL trên và chạy Go
 
 # LƯU Ý: Quy trình code chung
+
+````markdown
 ## Tạo nhánh mới từ develop:
 
 git checkout develop
@@ -135,3 +141,4 @@ git commit -m "Mô tả ngắn gọn thay đổi"
 ## Push lên GitHub:
 
 git push origin feature/<ten-chuc-nang>
+````
