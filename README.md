@@ -122,6 +122,8 @@ CREATE TABLE BaoCao (
 - B3: Copy code SQL trên và chạy Go
 
 # LƯU Ý: Quy trình code chung
+
+````markdown
 ## Tạo nhánh mới từ develop:
 
 git checkout develop
@@ -138,3 +140,4 @@ git commit -m "Mô tả ngắn gọn thay đổi"
 ## Push lên GitHub:
 
 git push origin feature/<ten-chuc-nang>
+````
