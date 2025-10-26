@@ -32,6 +32,7 @@ FINDU/
 - Mục tiêu: tách biệt rõ ràng giữa **xử lý logic**, **giao diện**, và **dữ liệu**.
 
 ## 2. CSDL (code SQL)
+````markdown
 CREATE TABLE PhongBan (
     maPB INT AUTO_INCREMENT PRIMARY KEY,
     tenPB VARCHAR(100)
@@ -113,6 +114,7 @@ CREATE TABLE BaoCao (
     FOREIGN KEY (maTV) REFERENCES ThanhVien(maTV),
     FOREIGN KEY (maNV) REFERENCES NhanVien(maNV)
 );
+````
 
 ### 💡 Ghi chú: Cách tạo CSDL MySQL trong xampp
 - B1: Tạo CSDL với tên là: findu_db
