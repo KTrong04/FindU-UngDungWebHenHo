@@ -1,6 +1,7 @@
 <?php
 class thanhVienHelper
 {
+    // acount
     public function validateInput($hoTen, $tuoi, $gioiTinh, $email, $password, $repassword)
     {
         // Kiểm tra rỗng
@@ -46,6 +47,23 @@ class thanhVienHelper
         // // Kiểm tra email đúng định dạng
         // if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         //     return "Email không hợp lệ.";
+        // }
+
+        return true;
+    }
+
+    // BaiViet
+    public function validateInputDangBaiViet($noiDung, $hashtag, $quyenXem, $files)
+    {
+        // Kiểm tra rỗng
+        if (empty($noiDung) && empty($hashtag) && (empty($files) || $files['error'][0] == UPLOAD_ERR_NO_FILE)) {
+            return "Vui lòng nhập nội dung bài viết hoặc chọn tệp tin.";
+        }
+
+        // // Kiểm tra quyền xem hợp lệ
+        // $validQuyenXem = ['congKhai', 'banBe', 'riengTu'];
+        // if (!in_array($quyenXem, $validQuyenXem)) {
+        //     return "Quyền xem không hợp lệ.";
         // }
 
         return true;

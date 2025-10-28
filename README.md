@@ -65,7 +65,9 @@ CREATE TABLE ThanhVien (
     diaChi VARCHAR(255),
     soThich VARCHAR(255),
     trangThai ENUM('hoatdong', 'khoa'),
-    moTa TEXT
+    moTa TEXT,
+    ngayKhoa DATETIME,
+    ngayMoKhoa DATETIME
 );
 
 CREATE TABLE BaiViet (

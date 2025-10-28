@@ -28,7 +28,7 @@
         <ul class="menu">
             <li class="items"><a href="/project-FindU/app/views/user/"><img src="/project-FindU/public/assets/img/menu-notifications.svg" alt="" class="icon-menu"></a></li>
             <li class="items"><a href="/project-FindU/app/views/user/trangChu.php"><img src="/project-FindU/public/assets/img/menu-chat.svg" alt="" class="icon-menu"></a></li>
-            <li class="items"><a href="/project-FindU/app/views/user/trangChu.php"><img src="/project-FindU/public/assets/img/menu-acount.svg" alt="" class="icon-menu"></a></li>
+            <li class="items"><a href="/project-FindU/app/views/user/hoSo.php"><img src="/project-FindU/public/assets/img/menu-acount.svg" alt="" class="icon-menu"></a></li>
         </ul>
     </div>
 </header>
