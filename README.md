@@ -62,7 +62,9 @@ CREATE TABLE ThanhVien (
     diaChi VARCHAR(255),
     soThich VARCHAR(255),
     trangThai ENUM('hoatdong', 'khoa'),
-    moTa TEXT
+    moTa TEXT,
+    ngayKhoa DATETIME,
+    ngayMoKhoa DATETIME
 );
 
 CREATE TABLE BaiViet (
@@ -72,7 +74,7 @@ CREATE TABLE BaiViet (
     video VARCHAR(255),
     quyenXem ENUM('cong_khai', 'ban_be', 'rieng_tu'),
     theTag VARCHAR(255),
-    trangThai BOOLEAN,
+    trangThai ENUM('da_duyet', 'cho_duyet'),
     thoiGianDang DATETIME,
     moTa TEXT,
     maTV INT,

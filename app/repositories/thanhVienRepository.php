@@ -12,6 +12,7 @@ class thanhVienRepository
         $this->conn = $db->connect();
     }
 
+    //  ThanhVien
     // Create
     public function create($hoTen, $tuoi, $gioiTinh, $email, $password)
     {
@@ -25,9 +26,9 @@ class thanhVienRepository
 
         if ($checkStmt->fetchColumn() > 0) {
             // Email đã tồn tại -> không thêm nữa
-            throw new Exception("Email này đã được sử dụng. Vui lòng chọn email khác!");
+            return false;
         }
-        
+
         // Nếu email chưa tồn tại, tiến hành thêm mới
         $sql = "INSERT INTO thanhvien (hoTen, tuoi, gioiTinh, email, password)
                 VALUES (:hoTen, :tuoi, :gioiTinh, :email, :password)";
@@ -84,5 +85,41 @@ class thanhVienRepository
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         return $stmt->execute();
+    }
+
+    // BaiViet
+    // Create
+    public function createBaiViet($maTV, $noiDung, $hashtag, $quyenXem, $files)
+    {
+        // Lấy danh sách ảnh và video (mảng trả về từ handleUploadFiles)
+        $images = !empty($files['images']) ? implode(',', $files['images']) : null;
+        $videos = !empty($files['videos']) ? implode(',', $files['videos']) : null;
+
+        $sql = "INSERT INTO baiviet (
+                maTV, noiDung, theTag, quyenXem, thoiGianDang, hinhAnh, video, trangThai, moTa
+            ) VALUES (
+                :maTV, :noiDung, :theTag, :quyenXem, NOW(), :hinhAnh, :video, 'cho_duyet', NULL
+            )";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':maTV', $maTV);
+        $stmt->bindParam(':noiDung', $noiDung);
+        $stmt->bindParam(':theTag', $hashtag);
+        $stmt->bindParam(':quyenXem', $quyenXem);
+        $stmt->bindParam(':hinhAnh', $images);
+        $stmt->bindParam(':video', $videos);
+
+        return $stmt->execute();
+    }
+
+    // Read all Bai Viet
+    public function readAll_BaiViet($maTV)
+    {
+        $sql = "SELECT * FROM baiviet WHERE maTV = :maTV ORDER BY thoiGianDang DESC";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':maTV', $maTV);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

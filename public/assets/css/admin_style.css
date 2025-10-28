@@ -1,0 +1,67 @@
+.sidebar {
+    background-color: aquamarine;
+}
+
+.logo {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+.menu {
+    width: 100%;
+    background-color: skyblue;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-level-2 {
+    display: none;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.items {
+    width: 100%;
+    list-style: none;
+    box-sizing: border-box;
+    padding: 10px 0px;
+}
+
+.items:hover .menu-level-2 {
+    display: block;
+    background-color: lightgray;
+}
+
+.box-form-khoa {
+    display: none;
+}
+
+.box-form-khoa.block {
+    display: block;
+}
+
+
+.menu-title {
+    width: 100%;
+    padding: 10px 0px
+}
+
+/* Chức năng khóa tài khoảng add js */
+.timeKhoa.none {
+    display: none;
+}
+
+.timeKhoa.block {
+    display: block;
+}
