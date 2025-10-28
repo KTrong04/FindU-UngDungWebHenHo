@@ -8,11 +8,11 @@
             <h1 class="brand"><a href="/project-FindU/app/views/user/">FindU</a></h1></a>
         </div>
 
+        <!-- Nút mở bộ lọc (đặt trong BODY, không để sau </html>) -->
         <div class="box-left-search">
-            <form action="" method="post" class="form-search">
-                <input type="text" placeholder="Tìm kiếm" name="txt_inputSearch" class="input-search">
-                <button type="submit" value="Tìm kiếm" name="btn_search" class="btn-search"><img src="/project-FindU/public/assets/img/menu-search.svg" alt=""></button>
-            </form>
+            <a href="searchForm.php" id="btn-open-filter-link" class="btn-search-trigger" aria-controls="filter-modal" aria-expanded="false">
+            <img src="/project-FindU/public/assets/img/menu-search.svg" alt="Mở Bộ Lọc">
+            </a>
         </div>
     </div>
 
