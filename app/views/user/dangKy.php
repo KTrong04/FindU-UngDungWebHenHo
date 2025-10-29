@@ -11,7 +11,7 @@ $tv = new thanhVienController();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FindU - Signup</title>
     <link rel="stylesheet" href="/project-FindU/public/assets/css/acount.css">
-    
+
 </head>
 
 <body>
@@ -37,7 +37,7 @@ $tv = new thanhVienController();
                                 <label for="Nam">Nam</label>
                                 <input type="radio" id="Nam" name="sex" value="M">
                             </div>
-                            <div class="box-radio"> 
+                            <div class="box-radio">
                                 <label for="Nu">Nữ</label>
                                 <input type="radio" id="Nu" name="sex" value="F">
                             </div>
@@ -54,7 +54,8 @@ $tv = new thanhVienController();
                 </p>
                 <p>
                     <label for="confirm-password">Xác nhận mật khẩu</label>
-                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Xác nhận mật khẩu">
+                    <input type="password" id="confirm-password" name="confirm-password"
+                        placeholder="Xác nhận mật khẩu">
                 </p>
                 <p class="box-btn-acount">
                     <button type="submit" value="Đăng ký" name="btn_dangKy" class="btn-acount">Đăng ký</button>

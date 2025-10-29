@@ -1,0 +1,111 @@
+/* 🌸 Toàn trang */
+body {
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #fff1f5, #ffe6ea);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* 💞 Khung chính */
+.wrapper {
+  background: #ffffff;
+  padding: 50px 60px;
+  border-radius: 25px;
+  box-shadow: 0 12px 35px rgba(255, 105, 135, 0.25);
+  width: 400px;
+  text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* 🎀 Tiêu đề và phụ đề */
+.title-area h2 {
+  color: #e91e63;
+  font-weight: 700;
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+.title-area .subtitle {
+  font-size: 14px;
+  color: #f06292;
+  margin-bottom: 25px;
+}
+
+/* 💌 Label và input */
+label {
+  display: block;
+  text-align: left;
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+input[type="password"] {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  border: 1px solid #f8bbd0;
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+input[type="password"]:focus {
+  border-color: #ec407a;
+  box-shadow: 0 0 6px rgba(233, 30, 99, 0.4);
+}
+
+/* 💗 Nút xác nhận */
+button {
+  background: linear-gradient(90deg, #ec407a, #f06292);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 25px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(236, 64, 122, 0.3);
+}
+
+/* 💬 Thông báo */
+.message {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+}
+.message.error {
+  background: #ffe6ea;
+  color: #d32f2f;
+  border: 1px solid #f8bbd0;
+}
+.message.success {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}
+
+/* ✨ Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

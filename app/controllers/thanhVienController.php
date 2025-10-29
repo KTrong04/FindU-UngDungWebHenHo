@@ -1,4 +1,7 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once __DIR__ . '/../repositories/thanhVienRepository.php';
 require_once __DIR__ . '/../helpers/thanhVienHelper.php';
 
@@ -136,6 +139,7 @@ class thanhVienController
     // Hiển thị bài viết
     public function hienThiBaiViet()
     {
+        
         $user_maTV = $_SESSION['user_maTV'];
         $uploadPath = $_SERVER['DOCUMENT_ROOT'] . '/Project-FindU/app/views/includes/baiViet.php';
         foreach ($this->repo->ReadAll_BaiViet($user_maTV) as $bv) {
@@ -143,4 +147,103 @@ class thanhVienController
             include $uploadPath;
         }
     }
+    //doi mat khau 
+    public function doiMatKhau($matKhauCu, $matKhauMoi, $nhapLai)
+    {
+    // Bắt đầu session an toàn
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    // ✅ Kiểm tra người dùng đã đăng nhập chưa
+    if (!isset($_SESSION['user_maTV'])) {
+        return ['success' => false, 'message' => "Vui lòng đăng nhập lại."];
+    }
+
+    $maTV = $_SESSION['user_maTV'];
+
+    // ✅ Gọi model
+    require_once __DIR__ . '/../models/thanhVienModel.php';
+    $model = new thanhVienModel();
+
+    // ✅ Lấy mật khẩu hiện tại từ DB
+    $matKhauHienTai = $model->layMatKhau($maTV);
+    if (!$matKhauHienTai) {
+        return ['success' => false, 'message' => "Không tìm thấy thông tin thành viên."];
+    }
+
+    // ✅ Kiểm tra mật khẩu cũ có đúng không
+    if (!password_verify($matKhauCu, $matKhauHienTai)) {
+        return ['success' => false, 'message' => "Mật khẩu cũ không đúng."];
+    }
+
+    // ✅ Nếu mật khẩu mới giống mật khẩu cũ → không cho phép
+    if (password_verify($matKhauMoi, $matKhauHienTai)) {
+        return ['success' => false, 'message' => "Mật khẩu mới không được trùng với mật khẩu cũ."];
+    }
+
+    // ✅ Kiểm tra độ dài và độ mạnh của mật khẩu mới
+    if (strlen($matKhauMoi) < 8) {
+        return ['success' => false, 'message' => "Mật khẩu mới phải có ít nhất 8 ký tự."];
+    }
+
+    // ✅ Kiểm tra bắt buộc có chữ hoa, số, ký tự đặc biệt
+    $pattern = '/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/';
+    if (!preg_match($pattern, $matKhauMoi)) {
+        return ['success' => false, 'message' => "Mật khẩu mới phải bao gồm ít nhất 1 chữ hoa, 1 số và 1 ký tự đặc biệt."];
+    }
+
+    // ✅ Kiểm tra xác nhận mật khẩu
+    if ($matKhauMoi !== $nhapLai) {
+        return ['success' => false, 'message' => "Xác nhận mật khẩu không khớp."];
+    }
+
+    // ✅ Hash mật khẩu mới và cập nhật DB
+    $matKhauMoiHash = password_hash($matKhauMoi, PASSWORD_BCRYPT);
+    $ketQua = $model->capNhatMatKhau($maTV, $matKhauMoiHash);
+
+    if ($ketQua) {
+        return ['success' => true, 'message' => "Đổi mật khẩu thành công!"];
+    } else {
+        return ['success' => false, 'message' => "Có lỗi khi cập nhật mật khẩu."];
+        }
+    }
+
+    public function dangXuat()
+    {
+        // Bắt đầu session nếu chưa có
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Nếu tồn tại session đăng nhập thì xóa
+        if (isset($_SESSION['user_maTV'])) {
+            // Xóa tất cả biến trong session
+            $_SESSION = [];
+
+            // Xóa cookie lưu session (nếu có)
+            if (ini_get("session.use_cookies")) {
+                $params = session_get_cookie_params();
+                setcookie(
+                    session_name(),
+                    '',
+                    time() - 42000,
+                    $params["path"],
+                    $params["domain"],
+                    $params["secure"],
+                    $params["httponly"]
+                );
+            }
+
+            // Hủy session
+            session_destroy();
+        }
+
+        // Chuyển hướng về trang đăng nhập
+        header("Location: /project-FindU/app/views/user/");
+        exit;
+    }
+
+
+
 }
