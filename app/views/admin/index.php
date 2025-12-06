@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,6 +14,7 @@
         <?php include_once __DIR__ . '/../admin/includes/sidebar.php'; ?>
         <div class="content"></div>
     </div>
+    <?php include_once __DIR__ . '/../admin/includes/footer.php'; ?>
 </body>
 
 </html>

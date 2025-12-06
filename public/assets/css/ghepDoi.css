@@ -1,0 +1,99 @@
+.container
+{
+    width: 100%;
+    margin-top: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid skyblue;   
+}
+
+.container > form
+{
+    width: 50%;
+}
+
+.box-sothich {
+  float: left;
+}
+
+
+.info-label-sothich {
+    float: left;
+    width: 150px;
+}
+
+/* Range age */
+.range-container {
+  width: 320px;
+  position: relative;
+  height: 32px;
+  margin: 10px 0;
+}
+
+/* Hai thanh range chồng nhau */
+.range-container input[type="range"] {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  pointer-events: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  z-index: 1;
+}
+
+/* Đảm bảo thanh thứ hai ở trên */
+.range-container input[type="range"]:last-of-type {
+  z-index: 2;
+}
+
+/* Track */
+.range-container input[type="range"]::-webkit-slider-runnable-track {
+  height: 5px;
+  background: #d0d0d0;
+  border-radius: 3px;
+  border: none;
+}
+.range-container input[type="range"]::-moz-range-track {
+  height: 5px;
+  background: #d0d0d0;
+  border-radius: 3px;
+  border: none;
+}
+
+/* Nút kéo */
+.range-container input[type="range"]::-webkit-slider-thumb {
+  pointer-events: auto;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #555;
+  border: 2px solid #fff;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  margin-top: -6px;
+}
+.range-container input[type="range"]::-moz-range-thumb {
+  pointer-events: auto;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #555;
+  border: 2px solid #fff;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.output {
+  margin-top: 35px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #333;
+}
+
+.error { color: red; }
+.warning { color: orange; }

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/project-FindU/public/assets/css/search_results.css">
 </head>
 <body>
+    
     <h1><?= e($pageTitle) ?></h1>
 
     <form method="get" action="/project-FindU/app/controllers/search_by_name.php">

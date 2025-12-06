@@ -1,0 +1,362 @@
+/* Đăng bài viết */
+
+.box-post-baiViet {
+    width: 50%;
+    height: auto;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: none;
+    box-shadow: 0px 0px 3px rgb(0, 0, 0, .2);
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    transition: height 1s ease-in-out;
+    overflow: hidden;
+    padding: 15px 0px;
+}
+
+.box-post-baiViet .box-block {
+    min-width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0px;
+    float: left;
+}
+
+.box-block.active {
+    width: 100%;
+    padding: 0px 20px;
+}
+
+.box-post-baiViet .bv-noidung {
+    width: 88%;
+    padding: 6px 20px;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.bv-noidung.active {
+    width: 100%;
+    padding: 6px 0px;
+}
+
+
+.box-info-acount {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.box-info-avatar > img
+{
+    width: 100%;
+    height: 100%;
+}
+
+.box-info-avatar {
+    width: 100%;
+    min-width: 50px;
+    height: 50px;
+    min-height: 50px;
+    overflow: hidden;
+    border: 1px solid rgb(165, 165, 165);
+    border-radius: 90px;
+    background-color: #F5F5F5;
+    margin: 0px 15px;
+}
+
+.box-info-avatar.active {
+    width: 6%;
+}
+
+.box-info-name {
+    width: 94%;
+    align-content: center;
+    text-align: left;
+    display: none;
+}
+
+.box-info-name.active  {
+    display: block;
+}
+
+.box-post-baiViet .textarea-post-baiViet {
+    width: 100%;
+    height: auto;
+    border: none;
+    resize: none;
+    font-size: 16px;
+    outline: none;
+    background-color: rgba(136, 136, 136, 0.1);
+    border-radius: 10px;
+    padding: 10px 15px;
+}
+
+.textarea-post-baiViet.active {
+    width: 87%;
+}
+
+
+.box-post-baiViet .input-hashtag-post-baiViet {
+    width: 87%;
+    height: auto;
+    border: none;
+    font-size: 14px;
+    outline: none;
+    margin-top: 10px;
+    background-color: rgba(136, 136, 136, 0.1);
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.nav-post-baiViet {
+    display: none;
+    width: 100%;
+}
+
+.nav-post-bv-box {
+    width: 100%;
+    display: flex;
+    padding: 20px 0px;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-post-bv-box .box-left,
+.nav-post-bv-box .box-right {
+    width: 45%;
+    text-align: left;
+}
+
+.nav-post-bv-box select {
+    border: none;
+    background-color: rgba(136, 136, 136, 0.1);
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.nav-post-baiViet button {
+    width: 91.5%;
+    border: none;
+    background-color: rgb(19, 156, 210);
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    color: #FFFFFF;
+    font-size: 16px;
+}
+
+.box-post-baiViet .textarea-post-baiViet:focus::placeholder,
+.box-post-baiViet .input-hashtag-post-baiViet:focus::placeholder {
+    color: transparent;
+}
+
+.box-post-baiViet.active {
+    height: auto !important;
+}
+
+.nav-post-baiViet.active {
+    display: block;
+}
+
+/* Hiển thị bài viết */
+.bai-viet {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+    max-width: 48.5%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bai-viet-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.bai-viet-header .bv-avatar {
+    min-width: 50px;
+    height: 50px;
+    min-height: 50px;
+    border: 1px solid rgb(165, 165, 165);
+    border-radius: 50%;
+    background-color: #F5F5F5;
+    overflow: hidden;
+}
+
+.bv-avatar img {
+    width: 100%;
+    height: 100%;
+}
+
+.bv-info {
+    line-height: 1.2;
+    width: 90%;
+    text-align: left;
+    padding: 0px 15px;
+}
+
+.bai-viet-header .bv-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+    padding: 10px 0px;
+}
+
+.bai-viet-header .bv-time {
+    font-size: 13px;
+    color: gray;
+}
+
+.bai-viet-header .quyen-xem {
+    font-size: 13px;
+    color: gray;
+    font-style: italic;
+}
+
+.bai-viet-content {
+    margin: 10px 0;
+    font-size: 15px;
+    text-align: left;
+}
+
+.the-tag {
+    color: #1877f2;
+    font-weight: bold;
+    margin: 0;
+}
+
+.bai-viet-media {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.bai-viet-media img {
+    width: 100%;
+    max-width: 550px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.bai-viet-video video {
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+
+
+/*Khung hiển thị media */
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.media-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.media-item img,
+.media-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+/* ======= Modal xem ảnh/video ======= */
+.media-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    overflow-y: auto;
+    padding: 40px;
+}
+
+.media-modal .modal-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.media-modal img {
+    width: 40%;
+    max-width: 90%;
+    border-radius: 10px;
+}
+
+.media-modal video {
+    max-width: 90%;
+    max-height: 80vh;
+    border-radius: 10px;
+}
+
+.media-modal .close {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    color: #fff;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.bai-viet-footer {
+    width: 100%;
+    margin-top: 10px;
+    border-top: 1px solid #dfdfdf;
+    padding: 8px 0px;
+}
+
+.bai-viet-footer>form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.bai-viet-footer .bv-footer-icons {
+    width: 30%;
+}
+
+.bv-footer-btn {
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    background-color: #FFFFFF;
+}
+
+.bv-footer-btn:hover {
+    box-shadow: 0px 0px 15px rgb(126, 126, 126, .5);
+}

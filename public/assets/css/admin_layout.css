@@ -3,9 +3,46 @@
     padding: 0;
 }
 
-.container {
+/* Montserrat */
+@font-face {
+    font-family: "Montserrat";
+    src: url("/project-FindU/public/assets/fonts/Montserrat-VariableFont_wght.ttf") format("truetype");
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    /* background-color: #8A25EF; */
+}
+
+header
+{
     width: 100%;
-    height: 200px;
+    height: auto;
+    display: flex;
+    align-items: center;
+}
+
+.box-header-left
+{
+    width: 80%;
+    height: 100%;
+    border: 1px solid skyblue;
+    text-align: center;
+}
+
+.box-header-right
+{
+    width: 20%;
+    height: 100%;
+    border: 1px solid pink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.container {
+    width: 100%;    
     display: flex;
 }
 
@@ -18,6 +55,7 @@
     width: 80%;
     height: auto;
 }
+
 
 footer
 {

@@ -1,0 +1,80 @@
+.box-tb-error, .box-tb-success {
+    transition: opacity 0.3s ease-out;
+}
+
+.box-tb-error.fading-out, 
+.box-tb-success.fading-out {
+    opacity: 0;
+}
+
+.box-tb-error {
+    width: 40%;
+    position: fixed;
+    top: 40%;
+    left: 30%;
+    background-color: rgb(252, 224, 224) !important;
+    color: rgb(167, 13, 13);
+    font-weight: bold;
+    text-align: center;
+    z-index: 1000;
+    padding: 50px 30px 30px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    color: black;
+    line-height: 30px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.close-btn:hover {
+    background: rgb(184, 44, 44) !important;
+    color: white;
+}
+
+.box-tb-error::before {
+    content: "THÔNG BÁO:";
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.box-tb-success {
+    width: 40%;
+    position: fixed;
+    top: 40%;
+    left: 30%;
+    background-color: rgb(184, 252, 184) !important;
+    color: green;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1000;
+    padding: 50px 30px 30px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.box-tb-success::before {
+    content: "THÔNG BÁO:";
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+

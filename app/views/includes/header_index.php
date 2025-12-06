@@ -1,7 +1,8 @@
 <head>
     <link rel="stylesheet" href="/project-FindU/public/assets/css/layout.css">
+    <link rel="stylesheet" href="/project-FindU/public/assets/css/thongBao.css">
 </head>
-<header>
+<header id="hd-index">
     <div class="box box-index">
         <nav>
             <a href="/project-FindU/app/views/user/"><img src="/project-FindU/public/assets/img/logo-FindU.png" alt="logo FindU" id="img-logo"></a>

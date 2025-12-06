@@ -1,0 +1,299 @@
+/* SIDEBAR  */
+.sidebar-head {
+    width: 100%;
+    height: 12vh;
+    background: linear-gradient(to top right, #fd267a, #ff6036);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-user {
+    width: 30%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    border-radius: 25px;
+    gap: 5px;
+    overflow: hidden;
+}
+
+.sidebar-user-avarta {
+    height: 100%;
+    min-width: 50px;
+    min-height: 50px;
+    border-radius: 50%;
+    background-color: #FFFFFF;
+    overflow: hidden;
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.sidebar-user-avarta img {
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar-user span {
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.sidebar-user:hover {
+    transition: 0.2s ease-in-out;
+    background-color: rgb(0, 0, 0, .5);
+}
+
+.sidebar-menu {
+    width: 60%;
+    height: 60%;
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    justify-content: right;
+    align-items: center;
+}
+
+.sidebar-menu-items {
+    height: 85%;
+    border-radius: 50%;
+    background-color: rgb(0, 0, 0, .5);
+    padding: 7px;
+    box-sizing: border-box;
+}
+
+.sidebar-icon-menu {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255);
+}
+
+.sidebar-menu-items:hover .sidebar-icon-menu {
+    background-color: #eb0052 !important;
+}
+
+.sidebar-menu-items:hover::after {
+    content: "Khám phá";
+    width: auto;
+    height: auto;
+    position: fixed;
+    top: 10%;
+    left: 18.5%;
+    background-color: rgb(0, 0, 0, .7);
+    border-radius: 10px;
+    color: #FFFFFF;
+    text-align: center;
+    align-content: center;
+    padding: 5px 6px;
+}
+
+.sidebar-content .sidebar-box-center {
+    width: 100%;
+    height: auto;
+    padding: 10px 0px;
+    text-align: center;
+    border-top: 1px solid #d8d8d8;
+}
+
+/* Sidebar Content */
+.sidebar-content {
+    width: 100%;
+    height: 88vh;
+}
+
+.sidebar-home {
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar-box-main {
+    width: 100%;
+    height: 90%;
+}
+
+#sidebar-main {
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar-box-menu {
+    width: 100%;
+    height: 10%;
+    align-content: center;
+}
+
+.sidebar-content-menu {
+    width: 100%;
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar-content-items {
+    width: auto;
+    padding: 10px 5px;
+    border-top: 2.5px solid #FFFFFF;
+    border-bottom: 2.5px solid #FFFFFF;
+    box-sizing: border-box;
+    font-weight: 500;
+    box-sizing: border-box;
+}
+
+.sidebar-content-items a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+}
+
+.sidebar-content-items.active {
+    border-bottom: 2.5px solid #eb0052;
+    box-sizing: border-box;
+}
+
+/* Các tương hợp */
+.sidebar-main-menu {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 10px;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.sidebar-main-items {
+    width: 45%;
+    aspect-ratio: 1/1.2;
+    list-style: none;
+
+    border: 3px solid transparent;
+    border-radius: 15px;
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.like-tuonghop {
+    background-image: linear-gradient(#fff, #fff), linear-gradient(140deg, #e9f208, #35b951);
+}
+
+.superlike-tuonghop {
+    background-image: linear-gradient(#fff, #fff), linear-gradient(140deg, #00daff, #0077ff);
+}
+
+.sidebar-main-items:hover {
+    transform: translateY(-5px);
+}
+
+
+.sidebar-main-items a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.sidebar-main-items-box {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    overflow: hidden;
+    /* Bo tròn ảnh avatar */
+}
+
+.sidebar-main-items-box>img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(4px);
+}
+
+/* Tin nhắn */
+.title-tinNhan {
+    height: 10%;
+    padding: 0px 18px;
+    align-content: center;
+    font-weight: 500;
+}
+
+.list-cuocTroChuyen {
+    width: 100%;
+    height: 90%;
+    overflow: auto;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.box-cuocTroChuyen {
+    width: 100%;
+    height: 80px;
+    border-bottom: 1px solid #d8d8d8;
+    align-content: center;
+    box-sizing: border-box;
+}
+
+.box-cuocTroChuyen button {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    gap: 20px;
+    font-weight: 650;
+    color: black;
+    border: none;
+    transition: 0.2s ease-in-out;
+    box-sizing: border-box;
+    background: none;
+}
+
+.box-cuocTroChuyen button:hover {
+
+    background-color: #f8e6eb;
+    transform: scale(1.07);
+    width: 96.6%;
+}
+
+.box-cuocTroChuyen-avatar {
+    height: 95%;
+    min-width: 55px;
+    min-height: 55px;
+    border-radius: 50pc;
+    overflow: hidden;
+}
+
+.box-cuocTroChuyen-avatar img {
+    width: 100%;
+    height: 100%;
+}
+
+.btn-profile {
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: none;
+}
+
+.btn-profile:hover {
+    transition: 0.2s ease-in-out;
+    background: linear-gradient(to top right, #fd26784e, #ff623652) !important;
+    transform: scale(1.1);
+}

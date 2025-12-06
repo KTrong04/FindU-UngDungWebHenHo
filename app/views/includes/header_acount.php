@@ -1,5 +1,6 @@
 <head>
     <link rel="stylesheet" href="/project-FindU/public/assets/css/layout.css">
+    <link rel="stylesheet" href="/project-FindU/public/assets/css/thongBao.css">
 </head>
 
 <header id="hd-acount">

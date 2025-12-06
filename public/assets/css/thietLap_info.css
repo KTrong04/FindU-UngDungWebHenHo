@@ -1,0 +1,104 @@
+.box-thiet-lap-info {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.box-info
+{
+    width: 80%;
+    border: 1px solid #d2d2d2;
+    border-radius: 10px;
+}
+
+.box-info > h2
+{
+    width: 100%;
+    text-align: center;
+    padding: 10px 0px;
+    color: #41046d;
+}
+
+.info-sothich {
+    width: 100%;
+    margin: auto;
+    padding: 10px 40px;
+    box-sizing: border-box;
+    align-content: center;
+    border-top: 1px solid #d2d2d2;
+}
+
+.info-label-sothich {
+    float: left;
+    width: 150px;
+}
+
+.info-box {
+    width: 100%;
+    margin: 20px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.frm_thietLap_info {
+    width: 100%;
+    display: grid;
+    align-items: center;
+    gap: 20px;
+    justify-items: center;
+    padding: 20px 0px;
+}
+
+.info-box .box-avatar {
+    width: 18%;
+    border: 1px solid black;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.box-avatar>img {
+    width: 100%;
+}
+
+.info-avatar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-diachi {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0px;
+    border-bottom: 1px solid #d2d2d2;
+}
+
+.info-diachi > label {
+    width: 90%;
+}
+
+input[name='txt_diachi'] {
+    width: 100%;
+    margin: 5px 0px;
+    padding: 10px 30px;
+    box-sizing: border-box;
+    border: 1px solid #d2d2d2;
+    border-radius: 7px;
+}
+
+button[name="btn_thietLap_info"] {
+    width: 90%;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(19, 156, 210);
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #FFFFFF;
+    font-weight: bolder;
+}
