@@ -11,6 +11,7 @@ class nhanVienRepositories
         $this->conn = $db->connect();
     }
 
+    // thanhvien db
     public function search_One_thanhVien($maTV)
     {
         $sql = "SELECT * FROM thanhvien WHERE maTV = :maTV";
@@ -64,5 +65,76 @@ class nhanVienRepositories
         } else {
             return false; // cập nhật thất bại
         }
+    }
+
+    // nhanvien db
+    public function Read_One($username)
+    {
+        $sql = "SELECT * FROM nhanvien WHERE username = :username";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function createNV($hoTen, $ngaySinh, $gioiTinh, $sdt, $email, $diaChi, $chucVu, $phongBan, $username, $password)
+    {
+        $sql = "INSERT INTO nhanvien 
+            (username, password, hoTen, ngaySinh, gioiTinh, soDienThoai, email, chucVu, maPB, diaChi) 
+            VALUES 
+            (:username, :password, :hoTen, :ngaySinh, :gioiTinh, :sdt, :email, :chucVu, :phongBan, :diaChi)";
+
+        $stmt = $this->conn->prepare($sql);
+
+        // Gán giá trị vào các placeholder
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':hoTen', $hoTen);
+        $stmt->bindParam(':ngaySinh', $ngaySinh);
+        $stmt->bindParam(':gioiTinh', $gioiTinh);
+        $stmt->bindParam(':sdt', $sdt);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':chucVu', $chucVu);
+        $stmt->bindParam(':phongBan', $phongBan);
+        $stmt->bindParam(':diaChi', $diaChi);
+
+        // Thực thi truy vấn
+        if ($stmt->execute()) {
+            return true;  // Thêm thành công
+        } else {
+            return false; // Thêm thất bại
+        }
+    }
+
+    public function find_password_now($maNV)
+    {
+        $sql = "SELECT password FROM nhanvien WHERE maNV = :maNV";
+        $stmt=  $this->conn->prepare($sql);
+        $stmt->bindParam(':maNV', $maNV);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function updateNewPassword($maNV, $passwordnew)
+    {
+        $sql = "UPDATE nhanvien 
+                SET password = :password
+                WHERE maNV = :maNV";
+        $stmt=  $this->conn->prepare($sql);
+        $stmt->bindParam(':maNV', $maNV);
+        $stmt->bindParam(':password', $passwordnew);
+        return $stmt->execute();
+    }
+
+
+    // phongban db
+    public function find_phongBan()
+    {
+        $sql = "SELECT * FROM phongban";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

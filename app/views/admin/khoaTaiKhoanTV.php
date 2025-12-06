@@ -55,7 +55,6 @@
                         $moTa = $_POST['txt_mota'];
                         $ngayKhoa = $_POST['txt_ngayKhoa'];
                         $ngayMoKhoa = $_POST['txt_ngayMoKhoa'];
-                        session_start();
                         if ($loaiKhoa == "Khóa vĩnh viễn" && $moTa != "" || $loaiKhoa == "Khóa có thời hạn" && $moTa != "" && $ngayKhoa != "" && $ngayMoKhoa != "") {
                             $nv->khoaThanhVien($_SESSION['maTV_Khoa'], $moTa, $ngayKhoa, $ngayMoKhoa, $loaiKhoa);
                         } else {

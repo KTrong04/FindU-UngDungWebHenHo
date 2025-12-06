@@ -65,3 +65,115 @@
 .timeKhoa.block {
     display: block;
 }
+
+
+/* Form info nhân viên */
+.box-form-info-nhanvien
+{
+    width: 100%;
+    height: auto;
+    border: 1px solid black;
+}
+
+.title-form-info-nv
+{
+    text-align: center;
+}
+
+.form-info-nhanvien
+{
+    width: 100%;
+    height: auto;
+    display: flex;
+}
+
+.box-form-info-nhanvien .box-left-info-nv, .box-right-info-nv
+{
+    width: 50%;
+    height: 100%;
+    border: 1px solid pink;
+    align-content: center;
+    justify-content: center;
+    padding: 0px 10px;
+}
+
+
+
+.form-info-nhanvien p
+{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding: 10px 0px;
+}
+
+.form-info-nhanvien label
+{
+    width: 20%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding: 0px 10px;
+    text-align: right;
+}
+
+.form-info-nhanvien input[type="text"], input[type="date"], input[type="password"]
+{
+    width: 65%;
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(232, 229, 225);
+}
+
+.table-info-nv
+{
+    width: 100%;
+    height: auto;
+    border: 1px solid skyblue;
+    text-align: center;
+}
+
+
+/* Đổi mật khẩu */
+.box-doi-password
+{
+    width: 40%;
+    height: auto;
+    position: fixed;
+    align-content: center;
+    top: 30%;
+    right: 30%;
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: skyblue;
+}
+
+.title-doi-password
+{
+    color: rgb(65, 4, 109);
+    width: 100%;
+    text-align: center;
+}
+
+.form-doi-password
+{
+    width: 100%;
+    height: 100%;
+}
+
+.form-doi-password p
+{
+    width: 100% !important;
+    height: auto;
+    padding: 10px 0px;
+    align-content: center;
+}
+
+.box-doi-password input
+{
+    width: 100% !important;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}

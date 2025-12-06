@@ -3,16 +3,40 @@
     background-color: #FFFFFF !important;
 }
 
+/* Montserrat */
+@font-face {
+    font-family: "Montserrat";
+    src: url("/project-FindU/public/assets/fonts/Montserrat-VariableFont_wght.ttf") format("truetype");
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    /* background-color: #8A25EF; */
+}
+
 header
 {
     height: 65px !important;
     background-color: rgba(0,0,0,.4) !important;
 }
 
+.title-admin
+{
+    width: 100%;
+    align-content: center;
+    text-align: center;
+}
+
+.title-admin > h1
+{
+    height: 100%;
+    color: rgb(65, 4, 109) !important;
+}
+
 .content
 {
     width: 100%;
-    height: 644px;
+    height: 654px;
     margin-top: 65px;
     /* background: url("/project-FindU/public/assets/img/banner-3.jpg");
     background-repeat: no-repeat;

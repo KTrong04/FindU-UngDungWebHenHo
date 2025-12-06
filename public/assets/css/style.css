@@ -1,68 +1,308 @@
-body
-{
+body {
     background-color: #f2f4f7;
 }
-.content
-{
-    width: auto;
-    height: auto;
-    margin-top: 65px;
-    text-align: center;
+
+.content {
+    width: 100%;
+    padding: 40px 0px 0px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
 }
 
-.box-post-baiViet
-{
-    width: 50%;
-    height: auto;
-    margin: auto;
-    margin-top: 20px;  
-    border: none;  
-    box-shadow: 0px 0px 3px rgb(0, 0, 0, .2);
-    border-radius: 10px;
-    background-color: #FFFFFF;
-    transition: height 0.6s ease-in-out;
+/* card area */
+:root {
+    --bg: #f1f3f5;
+    --card-w: 360px;
+    --card-h: 580px;
+    --btn-size: 64px;
+    --shadow: 0 10px 30px rgba(10, 10, 10, 0.12);
+    --accent: #ff3860;
+}
+
+.stage {
+    width: var(--card-w);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+.cards {
+    width: 100%;
+    height: var(--card-h);
+    position: relative;
+    touch-action: none;
+    /* allow JS handle touch gestures */
+}
+
+.card {
+    width: 100%;
+    position: absolute;
+    inset: 0;
+    border-radius: 5px;
     overflow: hidden;
-    padding: 10px 0px ;
+    background-color: #ffffff !important;
+    transition: transform 300ms ease, opacity 300ms ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    will-change: transform;
+    cursor: grab;
+    user-select: none;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-.box-post-baiViet .textarea-post-baiViet
-{
-    width: 80%;
-    height: auto;
-    border: none;
-    resize: none;
-    font-size: 16px;
-    outline: none;
-    background-color: rgba(87, 87, 87, 0.1);
-    border-radius: 10px;
-    padding: 10px 15px;
+.card:active {
+    cursor: grabbing;
 }
 
+/* overlay info (black blurred bar) */
+.info {
+    padding: 18px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.00), rgba(0, 0, 0, 0.65));
+    color: #fff;
+}
 
-.box-post-baiViet .input-hashtag-post-baiViet
-{
-    width: 80%;
-    height: auto;
-    border: none;
+.row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.name {
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.5px;
+}
+
+.meta {
     font-size: 14px;
-    outline: none;
-    margin-top: 10px;
+    opacity: 0.95
 }
 
-.nav-post-baiViet 
-{
+.school {
+    font-size: 13px;
+    opacity: 0.9;
+    margin-top: 6px
+}
+
+/* verified badge */
+.verified {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-detailes {
+    margin-left: auto;
+}
+
+
+
+
+/* top indicators */
+.indicator {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 18px;
+    color: #fff;
+    transform: rotate(-15deg);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.indicator.nope {
+    top: 0%;
+    left: 40%;
+    transform: rotate(-3deg) translateX(0);
+    width: 160px;
+}
+
+.indicator.like {
+    right: 40%;
+    left: auto;
+    width: 190px;
+    transform: rotate(15deg);
+}
+
+.indicator.super {
+    top: 50%;
+    left: 13%;
+    width: 230px;
+    transform: rotate(0deg);
+}
+
+/* bottom controls */
+.controls {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.btn {
+    width: var(--btn-size);
+    height: var(--btn-size);
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 18px rgba(10, 10, 10, 0.08);
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: transform 160ms ease, box-shadow 160ms;
+    box-sizing: border-box;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+}
+
+.btn:hover svg {
+    transition: 0.3s ease-out;
+    transform: scale(1.3);
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+
+.btn.red {
+    background: #fff;
+}
+
+.btn .icon {
+    width: 29px;
+    height: 29px;
+    opacity: 0.95;
+}
+
+/* small helper */
+.hidden {
     display: none;
 }
 
-.box-post-baiViet .textarea-post-baiViet:focus::placeholder, .box-post-baiViet .input-hashtag-post-baiViet:focus::placeholder
-{
-    color: transparent;
+/* small screen tweak */
+@media (max-width:420px) {
+    :root {
+        --card-w: 92vw;
+        --card-h: 72vh;
+        --btn-size: 56px;
+    }
 }
 
-.box-post-baiViet.active {
-    height: auto !important;
+.stage-hoSo {
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
-.nav-post-baiViet.active {
-    display: block;
+.stage-hoSo .card {
+    height: 300px !important;
+}
+
+.stage-hoSo .controls {
+    width: 360px !important;
+    position: fixed;
+    bottom: 60;
+}
+
+.stage-hoSo .infodetailes {
+    width: 100%;
+    height: auto;
+    background-color: #f0f2f4;
+    display: grid;
+    gap: 10px;
+    overflow: auto;
+    margin-top: 310px;
+    position: relative;
+}
+
+.stage-hoSo .infodetailes::after {
+    content: '';
+    width: 100%; /* Để tự động theo chiều rộng cha, thay vì cứng 360px */
+    height: 80px; /* Chiều cao vùng mờ */
+    position: absolute; /* Dính vào thẻ cha, không bị trôi khi scroll web */
+    bottom: 0; /* Nằm sát đáy */
+    left: 0;
+    border-radius: 0 0 10px 10px; /* Chỉ bo tròn 2 góc dưới cho khớp */
+    pointer-events: none; /* QUAN TRỌNG: Để vẫn vuốt/click được nội dung bên dưới */
+    
+    /* Gradient mượt từ trong suốt -> trắng */
+    background: linear-gradient(to bottom, 
+        rgba(255, 255, 255, 0) 0%,      /* Trong suốt hoàn toàn */
+        rgba(243, 243, 243, 0.6) 60%,   /* Mờ nhẹ */
+        #e1e1e1 100%                    /* Trắng đục ở đáy */
+    );
+}
+
+.info-box-infodetailes {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background-color: #ffffff;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+header[class="box-infodetailes-title"] {
+    color: rgb(0, 0, 0);
+    font-weight: 650;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 10px;
+    padding: 20px 0px;
+}
+
+.info-box-infodetailes svg {
+    width: 16;
+    height: 16;
+}
+
+.box-infodetailes-content {
+    width: 100%;
+    height: auto;
+    padding: 10px 0px;
+    border-top: 1px solid #d8d8d8;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+}
+
+.list-soThich {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.box-soThich-info {
+    margin: 5px;
+    padding: 7px 10px;
+    background-color: #f0f2f4;
+    border-radius: 20px;
+    float: left;
+}
+
+.btn_infodetailes {
+    width: 100%;
+    border: none;
+    background: none;
+    margin: 40px 0px;
+    color: #ff3860;
+    font-weight: 650;
 }

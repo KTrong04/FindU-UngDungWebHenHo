@@ -25,6 +25,9 @@ FINDU/
 │ │ ├── js/
 │ │ └── video/
 │ └── uploads/ # File người dùng tải lên (ảnh đại diện,...)
+|   ├── avatars/
+|   ├── images/
+|   ├── videos/
 │
 └── index.php # File khởi động ứng dụng (Gateway)
 ````
@@ -34,12 +37,14 @@ FINDU/
 
 ## 2. CSDL (code SQL)
 ````markdown
-CREATE TABLE PhongBan (
+-- 1. Bảng Phòng Ban
+CREATE TABLE phongban (
     maPB INT AUTO_INCREMENT PRIMARY KEY,
     tenPB VARCHAR(100)
 );
 
-CREATE TABLE NhanVien (
+-- 2. Bảng Nhân Viên
+CREATE TABLE nhanvien (
     maNV INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) UNIQUE,
     password VARCHAR(255),
@@ -51,26 +56,31 @@ CREATE TABLE NhanVien (
     chucVu ENUM('nhanvien', 'quanly'),
     maPB INT,
     diaChi VARCHAR(255),
-    FOREIGN KEY (maPB) REFERENCES PhongBan(maPB)
+    FOREIGN KEY (maPB) REFERENCES phongban(maPB)
 );
 
-CREATE TABLE ThanhVien (
+-- 3. Bảng Thành Viên (Cập nhật thêm cột hocVan, hinh, bio)
+CREATE TABLE thanhvien (
     maTV INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(100) UNIQUE,
     password VARCHAR(255),
-    anhDaiDien VARCHAR(255),
+    anhDaiDien VARCHAR(255) DEFAULT 'avatar-default.svg',
     hoTen VARCHAR(100),
     gioiTinh CHAR(1),
     tuoi INT,
     diaChi VARCHAR(255),
     soThich VARCHAR(255),
-    trangThai ENUM('hoatdong', 'khoa'),
+    trangThai ENUM('hoatdong', 'khoa') DEFAULT 'hoatdong',
     moTa TEXT,
     ngayKhoa DATETIME,
-    ngayMoKhoa DATETIME
+    ngayMoKhoa DATETIME,
+    hocVan VARCHAR(100),
+    hinh VARCHAR(500),
+    bio VARCHAR(250)
 );
 
-CREATE TABLE BaiViet (
+-- 4. Bảng Bài Viết
+CREATE TABLE baiviet (
     maBV INT AUTO_INCREMENT PRIMARY KEY,
     noiDung TEXT,
     hinhAnh VARCHAR(255),
@@ -81,32 +91,72 @@ CREATE TABLE BaiViet (
     thoiGianDang DATETIME,
     moTa TEXT,
     maTV INT,
-    FOREIGN KEY (maTV) REFERENCES ThanhVien(maTV)
+    FOREIGN KEY (maTV) REFERENCES thanhvien(maTV)
 );
 
-CREATE TABLE BinhLuan (
+-- 5. Bảng Bình Luận
+CREATE TABLE binhluan (
     maBL INT AUTO_INCREMENT PRIMARY KEY,
     noiDung TEXT,
     thoiGianDang DATETIME,
     moTa TEXT,
     maBV INT,
     maTV INT,
-    FOREIGN KEY (maBV) REFERENCES BaiViet(maBV),
-    FOREIGN KEY (maTV) REFERENCES ThanhVien(maTV)
+    FOREIGN KEY (maBV) REFERENCES baiviet(maBV),
+    FOREIGN KEY (maTV) REFERENCES thanhvien(maTV)
 );
 
-CREATE TABLE TinNhan (
+-- 6. Bảng Cuộc Trò Chuyện (Đổi tên từ CuocTroChuyen -> thanhvien_cuoctrochuyen)
+CREATE TABLE thanhvien_cuoctrochuyen (
+    maCTC INT AUTO_INCREMENT PRIMARY KEY,
+    maTV1 INT NOT NULL,
+    maTV2 INT NOT NULL,
+    ngayTao DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (maTV1) REFERENCES thanhvien(maTV),
+    FOREIGN KEY (maTV2) REFERENCES thanhvien(maTV)
+);
+
+-- 7. Bảng Tin Nhắn (Đổi tên từ TinNhan -> thanhvien_tinnhan, thêm cột hinh, video)
+CREATE TABLE thanhvien_tinnhan (
     maTN INT AUTO_INCREMENT PRIMARY KEY,
+    maCTC INT NOT NULL,
     noiDung TEXT,
-    ngayGui DATETIME,
-    trangThai ENUM('da_xem', 'chua_xem'),
+    ngayGui DATETIME DEFAULT CURRENT_TIMESTAMP,
+    trangThai ENUM('da_xem', 'chua_xem') DEFAULT 'chua_xem',
     maTVGui INT,
     maTVNhan INT,
-    FOREIGN KEY (maTVGui) REFERENCES ThanhVien(maTV),
-    FOREIGN KEY (maTVNhan) REFERENCES ThanhVien(maTV)
+    hinh VARCHAR(255),
+    video VARCHAR(255),
+    FOREIGN KEY (maCTC) REFERENCES thanhvien_cuoctrochuyen(maCTC),
+    FOREIGN KEY (maTVGui) REFERENCES thanhvien(maTV),
+    FOREIGN KEY (maTVNhan) REFERENCES thanhvien(maTV)
 );
 
-CREATE TABLE BaoCao (
+-- 8. Bảng Ghép Đôi (MỚI: Chức năng Like/Nope giống Tinder)
+CREATE TABLE thanhvien_ghepdoi (
+    maGhepDoi INT AUTO_INCREMENT PRIMARY KEY,
+    maNguoiGui INT NOT NULL,
+    maNguoiNhan INT NOT NULL,
+    ngayGui DATETIME DEFAULT CURRENT_TIMESTAMP,
+    trangThai ENUM('nope', 'like', 'superlike') NOT NULL,
+    UNIQUE KEY unique_like (maNguoiGui, maNguoiNhan),
+    FOREIGN KEY (maNguoiGui) REFERENCES thanhvien(maTV) ON DELETE CASCADE,
+    FOREIGN KEY (maNguoiNhan) REFERENCES thanhvien(maTV) ON DELETE CASCADE
+);
+
+-- 9. Bảng Cặp Đôi (MỚI: Lưu các cặp đã match thành công)
+CREATE TABLE thanhvien_capdoi (
+    maCapDoi INT AUTO_INCREMENT PRIMARY KEY,
+    maThanhVien1 INT NOT NULL,
+    maThanhVien2 INT NOT NULL,
+    ngayGhepDoi DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_match (maThanhVien1, maThanhVien2),
+    FOREIGN KEY (maThanhVien1) REFERENCES thanhvien(maTV) ON DELETE CASCADE,
+    FOREIGN KEY (maThanhVien2) REFERENCES thanhvien(maTV) ON DELETE CASCADE
+);
+
+-- 10. Bảng Báo Cáo
+CREATE TABLE baocao (
     maBC INT AUTO_INCREMENT PRIMARY KEY,
     loaiViPham ENUM('baiviet', 'binhluan', 'thanhvien'),
     moTa TEXT,
@@ -114,16 +164,13 @@ CREATE TABLE BaoCao (
     thoiGianXL DATETIME,
     maTV INT,
     maNV INT,
-    FOREIGN KEY (maTV) REFERENCES ThanhVien(maTV),
-    FOREIGN KEY (maNV) REFERENCES NhanVien(maNV)
+    FOREIGN KEY (maTV) REFERENCES thanhvien(maTV),
+    FOREIGN KEY (maNV) REFERENCES nhanvien(maNV)
 );
 ````
 
 ### 💡 Ghi chú: Cách tạo CSDL MySQL trong xampp
-- B1: Tạo CSDL với tên là: findu_db
-- B2: Vào database findu_db, chọn SQL
-- B3: Copy code SQL trên và chạy Go
-
+- Tạo db với tên là 'findu_db' xong import file findu_db.sql
 # LƯU Ý: Quy trình code chung
 
 ## Tạo nhánh mới từ develop:
@@ -142,6 +189,13 @@ git commit -m "Mô tả ngắn gọn thay đổi"
 ## Push lên GitHub:
 ````markdown
 git push origin feature/<ten-chuc-nang>
+
+# Nếu muốn code tiếp
+## Chuyển sang nhánh main
+git pull origin main
+
+## Kéo code mới nhất từ nhánh main về máy
+git pull origin main
 ````
 
 

@@ -1,0 +1,266 @@
+/* BOX CHAT */
+.box-chat {
+    width: 70%;
+    height: 90vh;
+    margin: auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.box-chat-top {
+    width: 100%;
+    height: 13%;
+
+}
+
+.box-chat-top form {
+    height: 100%;
+    width: 100%;
+}
+
+.box-chat-top>form>button {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 15px;
+    padding: 0px 30px;
+    border: none;
+    background: linear-gradient(to top right, #fd26788c, #ff62368e);
+}
+
+.box-chat-avatar {
+    height: 70%;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.box-chat-top .box-chat-avatar img {
+    height: 100%;
+}
+
+.box-chat-top button span {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.box-chat-center {
+    width: 100%;
+    height: 77%;
+    background-color: #ffffff;
+}
+
+#message_list {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding: 15px 0px;
+    box-sizing: border-box;
+}
+
+.message-box {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.textMessage {
+    width: auto;
+    padding: 12px 20px;
+    background-color: #F0F0F0;
+    border-radius: 10pc;
+    margin: 0px 10px;
+}
+
+.msg-me .textMessage {
+    background: linear-gradient(to top right, #fd26784e, #ff623652) !important;
+}
+
+.imgMessage {
+    width: 50%;
+    display: grid;
+    margin: 0px 10px;
+    gap: 10px;
+}
+
+.msg-me .imgMessage {
+    padding: 12px 20px;
+    justify-content: right;
+}
+
+.msg-friend .imgMessage {
+    padding: 12px 10px;
+    justify-content: left;
+}
+
+.imgMessage img {
+    height: 150px;
+    border-radius: 10px;
+    border: 1px solid #ffffff;
+}
+
+.videoMessage {
+    width: 50%;
+    display: grid;
+    padding: 12px 20px;
+    margin: 0px 10px;
+    gap: 10px;
+}
+
+.msg-me .videoMessage {
+    padding: 12px 20px;
+    justify-content: right;
+}
+
+.msg-friend .videoMessage {
+    padding: 12px 10px;
+    justify-content: left;
+}
+
+.videoMessage video {
+    height: 150px;
+    border-radius: 10px;
+    border: 1px solid #ffffff;
+}
+
+.msg-me {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.msg-friend {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.box-chat-bottom {
+    width: 100%;
+    height: 10%;
+    background: linear-gradient(to top right, #fd26784e, #ff623652);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.box-chat-bottom>.btn-send:active {
+    background: linear-gradient(to top right, #fd26784e, #ff623652) !important;
+}
+
+.thong-bao-chat {
+    width: 100%;
+    height: 100%;
+    align-content: center;
+    text-align: center;
+}
+
+/* Ẩn input file mặc định */
+.input-file-hidden {
+    display: none;
+}
+
+/* Style cho nút icon đính kèm */
+.btn-attach {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    margin-right: 5px;
+    transition: 0.2s;
+}
+
+.btn-attach:hover {
+    background-color: #f0f0f0;
+    /* Hiệu ứng khi di chuột */
+    border-radius: 50%;
+}
+
+.btn-attach img {
+    width: 24px;
+    /* Kích thước icon */
+    height: 24px;
+}
+
+/* Style cho dòng text thông báo số lượng file */
+.file-preview-text {
+    font-size: 12px;
+    color: #007bff;
+    margin-right: 5px;
+    white-space: nowrap;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Nút gửi tin nhắn */
+.btn-send {
+    border: none;
+    outline: none;
+    background: transparent;
+    /* Nền trong suốt */
+    cursor: pointer;
+
+    /* Căn giữa icon trong nút */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Kích thước nút */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    /* Bo tròn thành hình tròn */
+
+    margin-left: 8px;
+    /* Cách ô nhập liệu một chút */
+    transition: all 0.2s ease;
+    /* Hiệu ứng mượt mà */
+}
+
+/* Hiệu ứng khi di chuột vào */
+.btn-send:hover {
+    background-color: #f0f2f5;
+    /* Màu nền xám nhạt khi hover */
+    transform: scale(1.1);
+    /* Phóng to nhẹ tạo cảm giác nhấn */
+}
+
+.btn-send:hover svg {
+    transition: 0.3s ease-in-out;
+    transform: scale(1.3);
+}
+
+/* Hiệu ứng khi bấm xuống */
+.btn-send:active {
+    transform: scale(0.95);
+    /* Thu nhỏ nhẹ khi click */
+    background-color: #e4e6eb;
+}
+
+.box-chat-bottom {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #fff;
+    border-top: 1px solid #eee;
+}
+
+#txt_chat {
+    flex: 1;
+    /* Chiếm hết không gian còn lại */
+    border: none;
+    background-color: #f0f2f5;
+    padding: 10px 15px;
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+    margin: 0 5px;
+    resize: none;
+    /* Không cho kéo giãn textarea */
+    max-height: 100px;
+}

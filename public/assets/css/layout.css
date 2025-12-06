@@ -23,10 +23,19 @@
 body {
     font-family: 'Montserrat', sans-serif;
     /* background-color: #8A25EF; */
+
 }
 
-/* Header layout*/
-header {
+button,
+input,
+textarea,
+select {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* ============HEADER CHUNG ACOUNT, INDEX============ */
+#hd-acount,
+#hd-index {
     width: 100%;
     height: 55px;
     background-color: #FFFFFF;
@@ -47,7 +56,8 @@ header a {
     text-decoration: none;
 }
 
-.box {
+#hd-acount .box,
+#hd-index .box {
     padding: auto;
     display: flex;
     align-items: center;
@@ -100,48 +110,8 @@ header a {
     font-size: 24px;
 }
 
-.box-left-search {
-    width: 65%;
-    padding: 0px 10px;
-}
 
-.box-left-search .form-search {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.form-search input {
-    width: 80%;
-    border: none;
-    background-color: rgba(98, 98, 98, 0.1);
-    border-radius: 20px;
-    padding: 8px 15px;
-}
-
-.form-search .btn-search {
-    border: none;
-    border-radius: 100%;
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #FFFFFF;
-}
-
-.form-search .btn-search img
-{
-    padding: 5px;
-}
-
-.form-search .btn-search img:hover {
-    border-radius: 20px;
-    box-shadow: 0px 0px 15px rgba(32, 32, 32,.2);
-}
-
-
-
+/* MENU  */
 .menu {
     width: 100%;
     height: 100%;
@@ -166,13 +136,11 @@ header a {
     padding: 0px 15px;
 }
 
-
 header .menu .items a {
     color: rgb(86, 0, 147);
     font-weight: bold;
     text-decoration: none;
 }
-
 
 /* header index */
 .box-index {
@@ -254,6 +222,143 @@ header .menu-index .items a {
 
 }
 
-/*Search form layout*/
+.menu-level-2 {
+    display: none;
+    position: fixed;
+    top: 45px;
+    left: 88%;
+    border-radius: 10px;
+}
+
+.menu-level-2 .items {
+    width: auto;
+    background-color: #6f93c9;
+    padding: 10px 5px !important;
+    margin: 10px 0px;
+    box-sizing: border-box;
+}
+
+.items:hover .menu-level-2 {
+    display: block;
+}
+
+/* Đổi mật khẩu */
+.box-doi-password {
+    width: 40%;
+    height: auto;
+    position: fixed;
+    align-content: center;
+    top: 200px;
+    right: 30%;
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: skyblue;
+}
+
+.title-doi-password {
+    color: rgb(65, 4, 109);
+    width: 100%;
+    text-align: center;
+}
+
+.form-doi-password {
+    width: 100%;
+    height: 100%;
+}
+
+.form-doi-password p {
+    width: 100% !important;
+    height: auto;
+    padding: 10px 0px;
+    align-content: center;
+}
+
+.box-doi-password input {
+    width: 100% !important;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
 
 /* Footer layout*/
+footer {
+    width: 100%;
+    height: auto;
+    float: left;
+    text-align: center;
+}
+
+/* ==============HOME============== */
+.main {
+    width: 100%;
+    min-width: 1125px;
+    height: 100%;
+    display: flex;
+
+}
+
+#header-home {
+    width: 40px;
+    height: 50%;
+    position: fixed;
+    right: 0;
+    top: 25%;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    border: 1px solid #d8d8d8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-home {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+}
+
+.menu-home .items {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.menu-home .icon-menu {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.menu-home .icon-menu:hover {
+    /* background: linear-gradient(to top right, #fd267a, #ff6036); */
+    transition: 0.2s ease-in-out;
+    transform: scale(1.2);
+}
+
+.box-left-search {
+    width: 100%;
+}
+
+.main-left {
+    width: 24.6%;
+    min-width: 325px;
+    height: auto;
+    float: left;
+    border-right: 1px solid #d8d8d8;
+}
+
+.sidebar {
+    width: 100%;
+    height: 100vh;
+    background-color: #FFFFFF;
+}
+
+.main-right {
+    width: 75%;
+    min-width: 800px;
+    height: auto;
+    float: left;
+    margin: 0;
+    padding: 0;
+}

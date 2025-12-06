@@ -1,0 +1,261 @@
+/* Modal Overlay (Nền tối) */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9999; /* Đảm bảo nằm trên cùng */
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hộp nội dung Modal */
+.modal-content {
+    background: #fff;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    animation: slideDown 0.3s ease;
+}
+
+.main-modal-content {
+    width: 100%;
+    overflow: auto;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* --- TINDER MODAL STYLE --- */
+.modal-content.tinder-style {
+    background: #f0f2f4; /* Nền xám nhẹ */
+    padding: 0;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+}
+
+.modal-header {
+    background: #fff;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: center; /* Căn giữa tiêu đề */
+    position: relative;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.close-modal {
+    position: absolute;
+    right: 20px;
+    width: 30px; height: 30px;
+    font-size: 28px;
+    color: #d4d8e2;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-modal:hover {
+    color: red;
+    font-weight: 500;
+    background-color: #fff0f0;
+    border-radius: 50%;
+}
+
+.modal-body-scroll {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.section-title {
+    font-weight: 800;
+    font-size: 16px;
+    color: #000;
+    margin: 20px 0 10px 0;
+    text-transform: uppercase;
+}
+
+.sub-text {
+    font-size: 13px;
+    color: #7c7c7c;
+    margin-bottom: 15px;
+}
+
+/* --- PHOTO GRID --- */
+.media-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 150px 150px;
+    gap: 10px;
+}
+
+.media-box {
+    background: #e1e4e9;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px dashed #d4d8de;
+}
+
+.main-photo {
+    grid-row: 1 / 3; /* Ảnh chính chiếm 2 hàng dọc */
+    border: 4px dashed #c6c6c7 !important; /* Viền đứt nét màu hồng */
+}
+
+.img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.btn-add-photo {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: #d4d8de;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: 0.1s ease-in;
+}
+
+.btn-add-photo:hover {
+    transform: scale(1.2); /* Phóng to nhẹ khi di chuột */
+}
+
+.photo-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.placeholder-img {
+    font-size: 30px;
+    color: #bccad6;
+    font-weight: bold;
+}
+
+.file-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* --- INPUT GROUP --- */
+.tinder-input-group {
+    background: #fff;
+    padding: 10px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    border-radius: 10px;
+    margin: 5px 0px;
+}
+.tinder-input-group:first-of-type { border-top-left-radius: 10px; border-top-right-radius: 10px; }
+.tinder-input-group:last-of-type { border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; border-bottom: none; }
+
+.tinder-input-group label {
+    display: block;
+    font-size: 12px;
+    color: #7c7c7c;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.tinder-input-group input, .tinder-input-group textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    background: transparent;
+    resize: none;
+}
+
+/* --- TAGS / SỞ THÍCH (QUAN TRỌNG NHẤT) --- */
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tag-item input[type="checkbox"] {
+    display: none; /* Ẩn checkbox xấu xí */
+}
+
+.tag-content {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 50px; /* Bo tròn dạng viên thuốc */
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #fff;
+    font-weight: 500;
+}
+
+/* Khi Checkbox được chọn -> Đổi màu Label */
+.tag-item input:checked + .tag-content {
+    border-color: #fe3c72;
+    color: #fe3c72; /* Màu chữ hồng */
+    background: rgba(254, 60, 114, 0.1); /* Nền hồng nhạt */
+    font-weight: 700;
+}
+
+/* --- FOOTER --- */
+.modal-footer.sticky-footer {
+    background: #fff;
+    padding: 15px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-tinder-save {
+    background: linear-gradient(45deg, #fd267a, #ff6036); /* Gradient màu Tinder */
+    color: white;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.btn-tinder-save:active {
+    transform: scale(0.98);
+}
