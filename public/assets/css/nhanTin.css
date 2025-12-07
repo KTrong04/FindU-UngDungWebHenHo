@@ -13,12 +13,12 @@
 
 }
 
-.box-chat-top form {
+.box-chat-top .link-profile-chat {
     height: 100%;
     width: 100%;
 }
 
-.box-chat-top>form>button {
+.box-chat-top>.link-profile-chat>button {
     width: 100%;
     height: 100%;
     display: flex;
