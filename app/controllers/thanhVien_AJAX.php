@@ -121,16 +121,15 @@ if (isset($_GET['maCTC']) && isset($_GET['maTV_chat'])) {
     echo '
     <div class="box-chat">
         <div class="box-chat-top">
-            <form method="post" action="/project-FindU/app/views/user/hoSo.php">
-                <input type="hidden" name="maTV_item" value="' . $info['maTV'] . '">
-                <button type="submit">
+            <a class="link-profile-chat" href="/project-FindU/app/views/user/hoSo.php?id_profile=' . $info['maTV'] . '">
+                <button type="button">
                     <div class="box-chat-avatar">
                         <img src="/project-FindU/public/uploads/avatars/' . htmlspecialchars($info['anhDaiDien']) . '" 
                              onerror="this.src=\'/project-FindU/public/assets/images/default-avatar.png\'" alt="">
                     </div>
                     <span>' . htmlspecialchars($info['hoTen']) . '</span>    
                 </button>
-            </form>
+            </a>
         </div> 
         <div class="box-chat-center">
             <div id="message_list" class="message-list-container">';
