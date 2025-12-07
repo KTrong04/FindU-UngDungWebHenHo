@@ -189,15 +189,7 @@ git commit -m "Mô tả ngắn gọn thay đổi"
 ## Push lên GitHub:
 ````markdown
 git push origin feature/<ten-chuc-nang>
-
-# Nếu muốn code tiếp
-## Chuyển sang nhánh main
-git pull origin main
-
-## Kéo code mới nhất từ nhánh main về máy
-git pull origin main
 ````
-
 
 # Nếu muốn code tiếp
 ## Chuyển sang nhánh main
