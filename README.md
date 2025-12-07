@@ -192,10 +192,6 @@ git push origin feature/<ten-chuc-nang>
 ````
 
 # Nếu muốn code tiếp
-## Chuyển sang nhánh main
-````markdown
-git pull origin main
-````
 ## Kéo code mới nhất từ nhánh main về máy
 ````markdown
 git pull origin main
