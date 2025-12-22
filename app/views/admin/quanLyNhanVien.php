@@ -8,10 +8,11 @@
 </head>
 
 <body>
-    <?php include_once __DIR__ . '/../admin/includes/header.php'; $nvql->run_confignChucVu();?>
+    <?php include_once __DIR__ . '/../admin/includes/config.php'; ?>
     <div class="container">
         <?php include_once __DIR__ . '/../admin/includes/sidebar.php'; ?>
         <div class="content">
+            <?php include_once __DIR__ . '/../admin/includes/header.php'; $nvql->run_confignChucVu();?>
             <div class="box-search-nv">
                 <form action="" method="post">
                     <label for="txt_searchNV">Tìm kiếm nhân viên</label>

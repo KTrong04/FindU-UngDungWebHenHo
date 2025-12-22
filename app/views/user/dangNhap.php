@@ -51,3 +51,5 @@ $tv = new thanhVienController();
 </body>
 
 </html>
+
+<script src="/project-FindU/public/assets/js/thongBao.js"></script>
