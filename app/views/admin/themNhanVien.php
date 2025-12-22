@@ -10,10 +10,13 @@
 </head>
 
 <body>
-    <?php include_once __DIR__ . '/../admin/includes/header.php'; $nvql->run_confignChucVu();?>
+    <?php include_once __DIR__ . '/../admin/includes/config.php'; ?>
     <div class="container">
         <?php include_once __DIR__ . '/../admin/includes/sidebar.php'; ?>
-        <?php include_once __DIR__ . '/../admin/includes/form_infoNhanVien.php'; ?>
+        <div class="content">
+            <?php include_once __DIR__ . '/../admin/includes/header.php'; $nvql->run_confignChucVu();?>
+            <?php include_once __DIR__ . '/../admin/includes/form_infoNhanVien.php'; ?>
+        </div>
     </div>
     <?php include_once __DIR__ . '/../admin/includes/footer.php'; ?>
 </body>

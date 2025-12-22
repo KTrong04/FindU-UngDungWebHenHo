@@ -8,9 +8,13 @@
 </head>
 
 <body>
-    <?php include_once __DIR__ . '/../admin/includes/header.php'; $nvql->run_confignChucVu();?>
+    <?php include_once __DIR__ . '/../admin/includes/config.php'; ?>
     <div class="container">
         <?php include_once __DIR__ . '/../admin/includes/sidebar.php'; ?>
+        <div class="content">
+            <?php include_once __DIR__ . '/../admin/includes/header.php';
+            $nvql->run_confignChucVu(); ?>
+        </div>
         <?php
         if (isset($_GET['btn_updateNV'])) {
             $nvql->infoNV_update();

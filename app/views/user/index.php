@@ -41,3 +41,5 @@ if ($tv->configLogin() === true) {
 </body>
 
 </html>
+
+<script src="/project-FindU/public/assets/js/thongBao.js"></script>

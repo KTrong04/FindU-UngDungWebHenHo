@@ -203,66 +203,65 @@ class thanhVienRepository
     // list gợi ý ghép đôi
     public function find_goiY_ghepDoi($maTV, $gioiTinh, $tuoi, $soThich)
     {
-        // Tách sở thích thành mảng
+        // 1. Xử lý sở thích
         $arrSoThich = array_filter(array_map('trim', explode(',', $soThich)));
 
         $likeSQL = "";
         if (!empty($arrSoThich)) {
             $likeConditions = [];
             foreach ($arrSoThich as $index => $st) {
+                // Tìm người có chứa ít nhất 1 trong các sở thích
                 $likeConditions[] = "tv.soThich LIKE :st{$index}";
             }
             $likeSQL = " AND (" . implode(' OR ', $likeConditions) . ") ";
         }
 
-        // SQL chuẩn
+        // 2. SQL Query
         $sql = "SELECT tv.*
                 FROM thanhvien tv
 
-                -- 1. Kiểm tra đã tương tác like/dislike chưa
+                -- A. Check tương tác (Like/Nope)
                 LEFT JOIN thanhvien_ghepdoi gd
-                    ON (gd.maNguoiGui = :maTV AND gd.maNguoiNhan = tv.maTV)
-                    
+                    ON gd.maNguoiGui = :maTV AND gd.maNguoiNhan = tv.maTV
 
-                -- 2. Kiểm tra đã là cặp đôi chưa
+                -- B. Check cặp đôi
                 LEFT JOIN thanhvien_capdoi cd
-                    ON (
-                        (cd.maThanhVien1 = :maTV AND cd.maThanhVien2 = tv.maTV)
-                        OR
-                        (cd.maThanhVien1 = tv.maTV AND cd.maThanhVien2 = :maTV)
-                    )
+                    ON (cd.maThanhVien1 = :maTV AND cd.maThanhVien2 = tv.maTV)
+                    OR (cd.maThanhVien1 = tv.maTV AND cd.maThanhVien2 = :maTV)
+
+                -- C. Check chặn (2 chiều: Mình chặn họ HOẶC Họ chặn mình)
+                LEFT JOIN thanhvien_chan c 
+                    ON (c.id_nguoi_chan = :maTV AND c.id_nguoi_bi_chan = tv.maTV)
+                    OR (c.id_nguoi_chan = tv.maTV AND c.id_nguoi_bi_chan = :maTV)
 
                 WHERE 
-                    gd.maNguoiGui IS NULL
-                    AND gd.maNguoiNhan IS NULL
-                    AND cd.maThanhVien1 IS NULL
-                    AND cd.maThanhVien2 IS NULL
+                    -- Điều kiện 1: Chưa tương tác
+                    gd.maNguoiGui IS NULL 
+                    
+                    -- Điều kiện 2: Chưa là cặp đôi
+                    AND cd.maThanhVien1 IS NULL 
+                    
+                    -- Điều kiện 3: Không nằm trong danh sách chặn (QUAN TRỌNG)
+                    AND c.id_nguoi_chan IS NULL 
 
+                    -- Điều kiện lọc cơ bản
                     AND tv.maTV != :maTV
                     AND tv.gioiTinh != :gioiTinh
                     AND tv.tuoi BETWEEN :minTuoi AND :maxTuoi
-
-                    -- THÊM ĐIỀU KIỆN NÀY:
-                    AND tv.maTV NOT IN (
-                        SELECT id_nguoi_bi_chan 
-                        FROM thanhvien_chan 
-                        WHERE id_nguoi_chan = :maTV
-                    )
-                    AND tv.maTV NOT IN (
-                        SELECT id_nguoi_chan 
-                        FROM thanhvien_chan 
-                        WHERE id_nguoi_bi_chan = :maTV
-                    )
                     
-                    AND tv.maTV != :maTV
-
+                    -- Điều kiện sở thích (nếu có)
                     $likeSQL
+                
+                -- Sắp xếp ngẫu nhiên để thay đổi danh sách mỗi lần load (Optional)
+                -- ORDER BY RAND() 
+                
+                -- Giới hạn số lượng thẻ mỗi lần lấy (Tối ưu hiệu suất)
+                -- LIMIT 20
             ";
-
 
         $stmt = $this->conn->prepare($sql);
 
-        // Gán params
+        // 3. Bind Params
         $stmt->bindParam(':maTV', $maTV);
         $stmt->bindParam(':gioiTinh', $gioiTinh);
 
@@ -272,7 +271,7 @@ class thanhVienRepository
         $stmt->bindParam(':minTuoi', $minTuoi);
         $stmt->bindParam(':maxTuoi', $maxTuoi);
 
-        // Gán sở thích nếu có
+        // Bind params sở thích
         if (!empty($arrSoThich)) {
             foreach ($arrSoThich as $index => $st) {
                 $stmt->bindValue(":st{$index}", "%$st%");
@@ -556,19 +555,19 @@ class thanhVienRepository
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-       // Thêm hàm này vào cuối class thanhVienRepository
+    // Thêm hàm này vào cuối class thanhVienRepository
     public function blockUser($maTV_chan, $maTV_bi_chan)
     {
         // Cập nhật tên cột theo đúng ảnh bạn gửi: id_nguoi_chan, id_nguoi_bi_chan, ngay_chan
         $sql = "INSERT INTO thanhvien_chan (id_nguoi_chan, id_nguoi_bi_chan, ngay_chan) 
                 VALUES (:maTV_chan, :maTV_bi_chan, NOW())";
-        
+
         $stmt = $this->conn->prepare($sql);
-        
+
         // Bind các biến truyền vào vào các tham số ảo
         $stmt->bindParam(':maTV_chan', $maTV_chan, PDO::PARAM_INT);
         $stmt->bindParam(':maTV_bi_chan', $maTV_bi_chan, PDO::PARAM_INT);
-        
+
         if ($stmt->execute()) {
             // Sau khi lưu vào bảng chặn, tiến hành xóa quan hệ ở các bảng khác
             $this->deleteCapDoi($maTV_chan, $maTV_bi_chan);
@@ -584,14 +583,14 @@ class thanhVienRepository
         // Cột theo cấu trúc bảng của bạn: id_nguoi_chan và id_nguoi_bi_chan
         $sql = "DELETE FROM thanhvien_chan 
                 WHERE id_nguoi_chan = :maTV_bo_chan AND id_nguoi_bi_chan = :maTV_bi_chan";
-        
+
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':maTV_bo_chan', $maTV_bo_chan, PDO::PARAM_INT);
         $stmt->bindParam(':maTV_bi_chan', $maTV_bi_chan, PDO::PARAM_INT);
-        
+
         return $stmt->execute();
     }
-    
+
     //Lấy danh sách tất cả người dùng đã bị chặn bởi một thành viên
     public function findAll_Blocked($maTV)
     {
@@ -599,11 +598,11 @@ class thanhVienRepository
                 FROM thanhvien tv
                 JOIN thanhvien_chan c ON tv.maTV = c.id_nguoi_bi_chan
                 WHERE c.id_nguoi_chan = :maTV";
-                
+
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':maTV', $maTV, PDO::PARAM_INT);
         $stmt->execute();
-        
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
