@@ -241,6 +241,21 @@ class thanhVienRepository
                     AND tv.maTV != :maTV
                     AND tv.gioiTinh != :gioiTinh
                     AND tv.tuoi BETWEEN :minTuoi AND :maxTuoi
+
+                    -- THÊM ĐIỀU KIỆN NÀY:
+                    AND tv.maTV NOT IN (
+                        SELECT id_nguoi_bi_chan 
+                        FROM thanhvien_chan 
+                        WHERE id_nguoi_chan = :maTV
+                    )
+                    AND tv.maTV NOT IN (
+                        SELECT id_nguoi_chan 
+                        FROM thanhvien_chan 
+                        WHERE id_nguoi_bi_chan = :maTV
+                    )
+                    
+                    AND tv.maTV != :maTV
+
                     $likeSQL
             ";
 
@@ -538,6 +553,57 @@ class thanhVienRepository
         $stmt->bindValue(':trangThai', 'da_duyet', PDO::PARAM_STR);
         $stmt->execute();
 
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+       // Thêm hàm này vào cuối class thanhVienRepository
+    public function blockUser($maTV_chan, $maTV_bi_chan)
+    {
+        // Cập nhật tên cột theo đúng ảnh bạn gửi: id_nguoi_chan, id_nguoi_bi_chan, ngay_chan
+        $sql = "INSERT INTO thanhvien_chan (id_nguoi_chan, id_nguoi_bi_chan, ngay_chan) 
+                VALUES (:maTV_chan, :maTV_bi_chan, NOW())";
+        
+        $stmt = $this->conn->prepare($sql);
+        
+        // Bind các biến truyền vào vào các tham số ảo
+        $stmt->bindParam(':maTV_chan', $maTV_chan, PDO::PARAM_INT);
+        $stmt->bindParam(':maTV_bi_chan', $maTV_bi_chan, PDO::PARAM_INT);
+        
+        if ($stmt->execute()) {
+            // Sau khi lưu vào bảng chặn, tiến hành xóa quan hệ ở các bảng khác
+            $this->deleteCapDoi($maTV_chan, $maTV_bi_chan);
+            $this->deleteGhepDoi($maTV_chan, $maTV_bi_chan);
+            return true;
+        }
+        return false;
+    }
+
+    //Hàm bỏ chặn người dùng
+    public function unblockUser($maTV_bo_chan, $maTV_bi_chan)
+    {
+        // Cột theo cấu trúc bảng của bạn: id_nguoi_chan và id_nguoi_bi_chan
+        $sql = "DELETE FROM thanhvien_chan 
+                WHERE id_nguoi_chan = :maTV_bo_chan AND id_nguoi_bi_chan = :maTV_bi_chan";
+        
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':maTV_bo_chan', $maTV_bo_chan, PDO::PARAM_INT);
+        $stmt->bindParam(':maTV_bi_chan', $maTV_bi_chan, PDO::PARAM_INT);
+        
+        return $stmt->execute();
+    }
+    
+    //Lấy danh sách tất cả người dùng đã bị chặn bởi một thành viên
+    public function findAll_Blocked($maTV)
+    {
+        $sql = "SELECT tv.maTV, tv.hoTen, tv.anhDaiDien 
+                FROM thanhvien tv
+                JOIN thanhvien_chan c ON tv.maTV = c.id_nguoi_bi_chan
+                WHERE c.id_nguoi_chan = :maTV";
+                
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':maTV', $maTV, PDO::PARAM_INT);
+        $stmt->execute();
+        
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

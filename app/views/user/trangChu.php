@@ -3,6 +3,42 @@ include_once __DIR__ . '/../includes/config.php';
 unset($_POST['maTV_item']);
 ?>
 
+<?php
+// Kiểm tra nếu có yêu cầu chặn từ link: ?action=block&id_bi_chan=...
+if (isset($_GET['action']) && $_GET['action'] == 'block' && isset($_GET['id_bi_chan'])) {
+    
+    $maTV_dang_nhap = $_SESSION['user_maTV']; // ID của bạn
+    $id_bi_chan = $_GET['id_bi_chan'];       // ID người bị chặn (ví dụ: Ánh Dương)
+
+    // Khởi tạo Repository và gọi hàm blockUser bạn vừa viết
+    $repository = new thanhVienRepository();
+    $result = $repository->blockUser($maTV_dang_nhap, $id_bi_chan);
+
+    if ($result) {
+        // Chặn xong thì dùng Javascript để thông báo và chuyển hướng trang cho sạch đường link
+        echo "<script>
+                alert('Đã chặn thành công người dùng này.');
+                window.location.href = 'trangChu.php'; 
+              </script>";
+        exit();
+    } else {
+        echo "<script>alert('Có lỗi xảy ra, vui lòng thử lại.');</script>";
+    }
+}
+
+//Kiểm tra nếu có yêu cầu bỏ chặn từ link: ?action=unblock&id_bo_chan=...
+if (isset($_GET['action']) && $_GET['action'] == 'unblock' && isset($_GET['id_bo_chan'])) {
+    $maTV_dang_nhap = $_SESSION['user_maTV'];
+    $id_bi_chan = $_GET['id_bo_chan'];
+
+    $repository = new thanhVienRepository();
+    if ($repository->unblockUser($maTV_dang_nhap, $id_bi_chan)) {
+        echo "<script>alert('Đã bỏ chặn người dùng này.'); window.location.href='danhSachChan.php';</script>";
+        exit();
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
