@@ -9,10 +9,12 @@
 </head>
 
 <body>
-    <?php include_once __DIR__ . '/../admin/includes/header.php'; ?>
+    <?php include_once __DIR__ . '/../admin/includes/config.php'; ?>
     <div class="container">
         <?php include_once __DIR__ . '/../admin/includes/sidebar.php'; ?>
-        <div class="content"></div>
+        <div class="content">
+            <?php include_once __DIR__ . '/../admin/includes/header.php'; ?>
+        </div>
     </div>
     <?php include_once __DIR__ . '/../admin/includes/footer.php'; ?>
 </body>
