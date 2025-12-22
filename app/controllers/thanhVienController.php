@@ -481,8 +481,13 @@ class thanhVienController
             echo    '</div>
                 </div>';
             if (!isset($_GET['sidebar']) || $detail['maTV'] != $_SESSION['user_maTV']) {
-                echo    '<div class="info-box-infodetailes">
-                        <button type="button" class="btn_infodetailes">Chặn ' . $hoTen . '</button>
+                echo '<div class="info-box-infodetailes">
+                        <a href="trangChu.php?action=block&id_bi_chan=' . $maTV_item . '" 
+                        onclick="return confirm(\'Bạn có chắc chắn muốn chặn ' . $hoTen . ' không?\')" 
+                        class="btn_infodetailes" 
+                        style="text-decoration: none; display: inline-block; text-align: center;">
+                        Chặn ' . $hoTen . '
+                        </a>
                     </div>';
             }
         }
