@@ -46,7 +46,9 @@ class thanhVienController
             $user = $this->repo->Read_One($email);
             if ($user && password_verify($password, $user['password'])) {
                 // Khởi tạo session
-                session_start();
+                if (empty(session_id())) {
+                    session_start();
+                }
                 $_SESSION['user_maTV'] = $user['maTV'];
                 $_SESSION['user_email'] = $user['email'];
                 $_SESSION['user_name'] = $user['hoTen'];
@@ -94,7 +96,9 @@ class thanhVienController
 
     public function configLogin()
     {
-        session_start();
+        if (empty(session_id())) {
+            session_start();
+        }
         if (!isset($_SESSION['user_maTV']) || !isset($_SESSION['user_email']) || !isset($_SESSION['user_name']) || $_SESSION['user_maTV'] == "" || $_SESSION['user_email'] == "" || $_SESSION['user_name'] == "") {
             return false;
         } else {
