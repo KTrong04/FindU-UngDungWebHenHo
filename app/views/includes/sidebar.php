@@ -64,8 +64,8 @@
             if ($tv->checkPasswordNow($pass, $_SESSION['user_maTV']) == true) {
                 echo '<div class="box-doi-password">';
                 echo    '<h1 class="title-doi-password">Đổi mật khẩu</h1>
-                        <form method="post" class="form-doi-password"> <button type="submit">X</button>';
-                echo            '<p><lable for="txt_passwordnew">Nhập lại mật khẩu</label><input type="password" name="txt_passwordnew" placeholder="Nhập mật khẩu mới"> </p>
+                        <form method="post" class="form-doi-password"> <button type="submit">X</button></form>';
+                echo            '<form method="post" class="form-doi-password"><p><lable for="txt_passwordnew">Nhập lại mật khẩu</label><input type="password" name="txt_passwordnew" placeholder="Nhập mật khẩu mới"> </p>
                             <p><lable for="txt_repasswordnew">Nhập lại mật khẩu</label><input type="password" name="txt_repasswordnew" placeholder="Nhập lại mật khẩu mới"></p>';
                 echo            '<p><button type="submit" name="btn_RunDoiPassword">Đổi mật khẩu</button></p>';
                 echo        '</form>
@@ -84,3 +84,84 @@
 </aside>
 
 <script src="/project-FindU/public/assets/js/sidebar.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Tìm form chứa nút "Đổi mật khẩu" (btn_RunDoiPassword)
+        // Chúng ta tìm nút submit có name='btn_RunDoiPassword' rồi lấy form cha của nó
+        const btnSubmit = document.querySelector("button[name='btn_RunDoiPassword']");
+
+        if (btnSubmit) {
+            const form = btnSubmit.closest("form");
+
+            form.addEventListener("submit", function(e) {
+                // Lấy giá trị từ 2 ô input
+                const passInput = form.querySelector("input[name='txt_passwordnew']");
+                const rePassInput = form.querySelector("input[name='txt_repasswordnew']");
+
+                const password = passInput.value;
+                const rePassword = rePassInput.value;
+
+                // Hàm hiển thị lỗi (Bạn có thể tùy chỉnh để hiện đẹp hơn thay vì alert)
+                function showError(message, inputName) {
+                    alert(message); // Hiện thông báo lỗi
+                    // Focus vào ô bị lỗi
+                    if (inputName === 'password') passInput.focus();
+                    if (inputName === 'repassword') rePassInput.focus();
+                }
+
+                // --- 1. KIỂM TRA ĐỘ MẠNH MẬT KHẨU ---
+
+                // Check rỗng
+                if (password === "") {
+                    e.preventDefault(); // Chặn gửi form
+                    return showError("Vui lòng nhập mật khẩu mới.", "password");
+                }
+
+                // Check độ dài
+                if (password.length < 8) {
+                    e.preventDefault();
+                    return showError("Mật khẩu phải có ít nhất 8 ký tự.", "password");
+                }
+
+                // Check chữ in HOA
+                if (!/[A-Z]/.test(password)) {
+                    e.preventDefault();
+                    return showError("Mật khẩu phải chứa ít nhất một chữ IN HOA.", "password");
+                }
+
+                // Check chữ thường
+                if (!/[a-z]/.test(password)) {
+                    e.preventDefault();
+                    return showError("Mật khẩu phải chứa ít nhất một chữ in thường.", "password");
+                }
+
+                // Check số
+                if (!/[0-9]/.test(password)) {
+                    e.preventDefault();
+                    return showError("Mật khẩu phải chứa ít nhất một chữ số.", "password");
+                }
+
+                // Check KÝ TỰ ĐẶC BIỆT
+                if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+                    e.preventDefault();
+                    return showError("Mật khẩu phải chứa ít nhất một ký tự đặc biệt (VD: @, #, !, ...).", "password");
+                }
+
+                // --- 2. KIỂM TRA MẬT KHẨU NHẬP LẠI (RE-PASSWORD) ---
+
+                if (rePassword === "") {
+                    e.preventDefault();
+                    return showError("Vui lòng nhập lại mật khẩu mới.", "repassword");
+                }
+
+                if (password !== rePassword) {
+                    e.preventDefault();
+                    return showError("Mật khẩu nhập lại không khớp. Vui lòng kiểm tra lại.", "repassword");
+                }
+
+                // Nếu chạy đến đây nghĩa là mọi thứ OK -> Form sẽ tự động submit
+            });
+        }
+    });
+</script>

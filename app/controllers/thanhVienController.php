@@ -139,18 +139,31 @@ class thanhVienController
 
     public function doiMatKhau($maTV, $passwordnew, $repasswordnew)
     {
+        // 1. Kiểm tra rỗng
         if ($passwordnew == "" || $repasswordnew == "") {
             echo $this->helper->message('error', 'Vui lòng nhập đầy đủ thông tin');
             return;
         }
 
+        // 2. Kiểm tra khớp
         if ($passwordnew != $repasswordnew) {
-            echo $this->helper->message('error', 'Mật khẩu không khớp với lòng kiểm tra lại');
+            echo $this->helper->message('error', 'Mật khẩu nhập lại không khớp');
             return;
         }
 
-        $passwordnew = $this->hashPassword($passwordnew);
-        if ($this->repo->updateNewPassword($maTV, $passwordnew)) {
+        // 3. KIỂM TRA ĐỘ MẠNH (REGEX) - Server side validation
+        // Ít nhất 8 ký tự, 1 hoa, 1 thường, 1 số, 1 ký tự đặc biệt
+        $pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/';
+
+        if (!preg_match($pattern, $passwordnew)) {
+            echo $this->helper->message('error', 'Mật khẩu không đủ mạnh (Cần 8 ký tự, bao gồm chữ hoa, thường, số và ký tự đặc biệt)');
+            return;
+        }
+
+        // 4. Mã hóa và lưu
+        $passwordnewHash = $this->hashPassword($passwordnew);
+
+        if ($this->repo->updateNewPassword($maTV, $passwordnewHash)) {
             echo $this->helper->message('success', 'Đổi mật khẩu thành công');
             return;
         } else {
@@ -587,6 +600,11 @@ class thanhVienController
                                     </div>
 
                                     <div class="tinder-input-group">
+                                        <label>Tuổi</label>
+                                        <input type="number" min="18" name="profile_tuoi" value="' . $tuoi_item . '" required placeholder="Nhập tuổi của bạn">
+                                    </div>
+
+                                    <div class="tinder-input-group">
                                         <label>Công việc / Học vấn</label>
                                         <input type="text" name="profile_hocVan" value="' . $hocVan . '" placeholder="Thêm công việc/trường học">
                                     </div>
@@ -624,7 +642,7 @@ class thanhVienController
                 </div>';
     }
 
-    public function capNhatHoSo($maTV, $anhDaiDien, $hinh, $hoTen, $hocVan, $diaChi, $bio, $soThich)
+    public function capNhatHoSo($maTV, $anhDaiDien, $hinh, $hoTen, $hocVan, $diaChi, $bio, $soThich, $tuoi)
     {
         $check_avatar = null;
         $check_hinh = null;
@@ -651,7 +669,7 @@ class thanhVienController
 
         $thanhvien = new thanhVienModel(
             $hoTen,
-            null,
+            $tuoi,
             null,
             null,
             null,
