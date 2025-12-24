@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,11 +12,12 @@
     <div class="container">
         <?php include_once __DIR__ . '/../admin/includes/sidebar.php'; ?>
         <div class="content">
-            <?php include_once __DIR__ . '/../admin/includes/header.php'; $nvql->run_confignChucVu();?>
+            <?php include_once __DIR__ . '/../admin/includes/header.php';
+            $nvql->run_confignChucVu(); ?>
             <?php include_once __DIR__ . '/../admin/includes/form_infoNhanVien.php'; ?>
+            <?php include_once __DIR__ . '/../admin/includes/footer.php'; ?>
         </div>
     </div>
-    <?php include_once __DIR__ . '/../admin/includes/footer.php'; ?>
 </body>
 
 </html>

@@ -1,0 +1,193 @@
+/* --- 1. BOX FORM CONTAINER (Thẻ Card Trắng) --- */
+.box-form-info-nhanvien {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    /* Bóng đổ mềm */
+    padding: 40px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+/* Đường viền trang trí trên cùng (Gradient Tím - Xanh) */
+.box-form-info-nhanvien::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #1e0b5d, #00d2d3);
+}
+
+/* --- 2. TIÊU ĐỀ --- */
+.title-form-info-nv {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e0b5d;
+    margin-top: 0;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #e0e0e0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* --- 3. BỐ CỤC FORM (2 CỘT) --- */
+.form-info-nhanvien {
+    display: flex;
+    flex-wrap: wrap;
+    /* Tự xuống dòng trên mobile */
+    gap: 40px;
+    /* Khoảng cách giữa 2 cột */
+}
+
+.box-left-info-nv,
+.box-right-info-nv {
+    flex: 1;
+    /* Chia đều 50-50 */
+    min-width: 300px;
+    /* Đảm bảo không bị co quá nhỏ */
+}
+
+/* --- 4. CÁC DÒNG NHẬP LIỆU (Thẻ P) --- */
+.form-info-nhanvien p {
+    margin-bottom: 20px;
+}
+
+/* --- 5. LABEL (NHÃN) --- */
+.form-info-nhanvien label {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+/* --- 6. INPUT TEXT, PASSWORD, DATE, SELECT --- */
+/* Loại trừ input radio ra để không bị vỡ giao diện */
+.form-info-nhanvien input:not([type="radio"]),
+.form-info-nhanvien select {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    /* Viền xám nhạt */
+    background-color: #fff;
+    font-size: 14px;
+    color: #333;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    /* Quan trọng để không bị tràn khung */
+    height: 45px;
+    /* Chiều cao cố định cho đều */
+}
+
+/* Hiệu ứng khi click vào ô nhập */
+.form-info-nhanvien input:not([type="radio"]):focus,
+.form-info-nhanvien select:focus {
+    border-color: #00d2d3;
+    /* Viền xanh Neon */
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 210, 211, 0.15);
+    /* Hào quang xanh */
+}
+
+/* Style riêng cho Select box */
+.form-info-nhanvien select {
+    appearance: none;
+    /* Xóa mũi tên mặc định của trình duyệt */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 16px;
+    cursor: pointer;
+}
+
+/* --- 7. XỬ LÝ RADIO BUTTON (GIỚI TÍNH) --- */
+/* Vì HTML để thẻ P lồng nhau hơi rối, ta xử lý khéo léo */
+.box-left-info-nv p:nth-child(3) {
+    background: #f9f9fc;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px dashed #ddd;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Ẩn label "Giới tính" gốc đi nếu muốn đẹp, hoặc để nguyên */
+.box-left-info-nv p:nth-child(3)>label:first-child {
+    margin-bottom: 0;
+    margin-right: 10px;
+    min-width: 70px;
+}
+
+/* Các thẻ P con chứa Radio */
+.box-left-info-nv p:nth-child(3) p {
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Input Radio */
+.form-info-nhanvien input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #00d2d3;
+    /* Màu xanh cho nút radio */
+    cursor: pointer;
+    margin: 0;
+}
+
+.form-info-nhanvien input[type="radio"]+label {
+    margin-bottom: 0;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+/* --- 8. NÚT SUBMIT (LƯU) --- */
+.form-info-nhanvien button[type="submit"] {
+    background: linear-gradient(135deg, #1e0b5d, #00d2d3);
+    /* Gradient Tím -> Xanh */
+    color: #fff;
+    border: none;
+    padding: 14px 40px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(30, 11, 93, 0.2);
+    width: 100%;
+    /* Full chiều rộng cột phải */
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-info-nhanvien button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 210, 211, 0.4);
+    background: linear-gradient(135deg, #2a0e75, #00e0e1);
+}
+
+/* --- 9. RESPONSIVE (MOBILE) --- */
+@media (max-width: 768px) {
+    .box-form-info-nhanvien {
+        padding: 20px;
+    }
+
+    .form-info-nhanvien {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .box-left-info-nv,
+    .box-right-info-nv {
+        min-width: 100%;
+    }
+}

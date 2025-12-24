@@ -1,179 +1,676 @@
-.sidebar {
-    background-color: aquamarine;
+:root {
+    --sidebar-bg-start: #1e0b5d;
+    /* Tím đậm */
+    --sidebar-bg-end: #0f0230;
+    /* Tím đen sâu */
+    --text-color: #a09eb5;
+    /* Xám tím nhạt */
+    --text-hover: #ffffff;
+    /* Trắng sáng */
+    --accent-color: #00d2d3;
+    /* Xanh Neon */
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    /* Hiệu ứng kính */
+    --transition-speed: 0.3s;
 }
 
-.logo {
-    width: 100%;
-    text-align: center;
-    padding: 20px 0px;
-}
-
-.sidebar a {
-    text-decoration: none;
-    color: black;
-    font-size: 18px;
-    font-weight: bolder;
-}
-
-.menu {
-    width: 100%;
-    background-color: skyblue;
-    box-sizing: border-box;
-    padding: 0;
+body {
     margin: 0;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    /* Font chữ hiện đại */
 }
 
-.menu-level-2 {
-    display: none;
-    width: 100%;
+/* Container Sidebar */
+.sidebar {
+    width: 260px;
+    min-height: 100% !important;
+    background: linear-gradient(180deg, var(--sidebar-bg-start) 0%, var(--sidebar-bg-end) 100%);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+    padding: 20px 15px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    /* Cho phép cuộn nếu menu quá dài */
+}
+
+/* Logo */
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo a {
+    font-size: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 0 15px rgba(0, 210, 211, 0.6);
+    /* Logo phát sáng */
+    transition: all 0.3s ease;
+}
+
+.logo a:hover {
+    color: var(--accent-color);
+}
+
+/* Menu List */
+.menu {
+    list-style: none;
     padding: 0;
     margin: 0;
 }
 
 .items {
-    width: 100%;
+    margin-bottom: 8px;
+}
+
+/* Link Menu (Cấp 1 & Cấp 2) */
+.sidebar a {
+    text-decoration: none;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all var(--transition-speed) ease;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Icon SVG */
+.nav-icon {
+    width: 22px;
+    height: 22px;
+    margin-right: 15px;
+    fill: var(--text-color);
+    transition: all var(--transition-speed) ease;
+}
+
+/* --- Hiệu ứng Hover & Active --- */
+.sidebar a:hover,
+.menu-open>.menu-title>a {
+    color: var(--text-hover);
+    background: var(--glass-bg);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transform: translateX(5px);
+}
+
+.sidebar a:hover .nav-icon,
+.menu-open>.menu-title>a .nav-icon {
+    fill: var(--accent-color);
+    filter: drop-shadow(0 0 8px var(--accent-color));
+    /* Icon phát sáng */
+    transform: scale(1.1);
+}
+
+/* Thanh chỉ dẫn bên trái khi Hover */
+.menu-title>a:hover::before,
+.menu-open>.menu-title>a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 60%;
+    width: 4px;
+    background-color: var(--accent-color);
+    border-radius: 0 4px 4px 0;
+    box-shadow: 0 0 8px var(--accent-color);
+}
+
+/* Mũi tên chỉ xuống */
+.arrow {
+    margin-left: auto;
+    font-size: 10px;
+    transition: transform 0.3s ease;
+    opacity: 0.7;
+}
+
+/* Xoay mũi tên khi mở */
+.menu-open .arrow {
+    transform: rotate(180deg);
+    color: var(--accent-color);
+    opacity: 1;
+}
+
+/* --- Menu Cấp 2 (Submenu) --- */
+.menu-level-2 {
     list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+    /* Mặc định ẩn */
+    padding-left: 20px;
+    position: relative;
+}
+
+/* Đường kẻ nối (Tree view) */
+.menu-level-2::before {
+    content: '';
+    position: absolute;
+    left: 24px;
+    top: 0;
+    bottom: 10px;
+    width: 1px;
+    background: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0, rgba(255, 255, 255, 0.2) 2px, transparent 2px, transparent 4px);
+}
+
+.menu-level-2 li {
+    position: relative;
+}
+
+/* Style link con */
+.menu-level-2 a {
+    font-size: 13px;
+    padding: 10px 15px 10px 25px;
+    color: #8a889e;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.menu-level-2 a:hover {
+    color: var(--accent-color);
+    transform: translateX(5px);
+}
+
+/* Chấm tròn nhỏ trước menu con */
+.menu-level-2 a::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    position: absolute;
+    left: 1px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: background-color 0.3s;
+}
+
+.menu-level-2 a:hover::after {
+    background-color: var(--accent-color);
+    box-shadow: 0 0 5px var(--accent-color);
+}
+
+/* Class JS thêm vào để hiện menu */
+.d-block {
+    display: block !important;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- HEADER STYLE --- */
+:root {
+    --header-height: 70px;
+    --primary-color: #1e0b5d;
+    --accent-color: #00d2d3;
+    --text-dark: #333;
+    --bg-light: #fff;
+    --shadow: 0 0px 10px rgba(0,0,0,0.3);
+}
+
+header {
+    width: 100%;
+    height: var(--header-height);
+    background-color: var(--bg-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    box-shadow: var(--shadow);
     box-sizing: border-box;
-    padding: 10px 0px;
-}
-
-.items:hover .menu-level-2 {
-    display: block;
-    background-color: lightgray;
-}
-
-.box-form-khoa {
-    display: none;
-}
-
-.box-form-khoa.block {
-    display: block;
-}
-
-
-.menu-title {
-    width: 100%;
-    padding: 10px 0px
-}
-
-/* Chức năng khóa tài khoảng add js */
-.timeKhoa.none {
-    display: none;
-}
-
-.timeKhoa.block {
-    display: block;
-}
-
-
-/* Form info nhân viên */
-.box-form-info-nhanvien
-{
-    width: 100%;
-    height: auto;
-    border: 1px solid black;
-}
-
-.title-form-info-nv
-{
-    text-align: center;
-}
-
-.form-info-nhanvien
-{
-    width: 100%;
-    height: auto;
-    display: flex;
-}
-
-.box-form-info-nhanvien .box-left-info-nv, .box-right-info-nv
-{
-    width: 50%;
-    height: 100%;
-    border: 1px solid pink;
-    align-content: center;
-    justify-content: center;
-    padding: 0px 10px;
-}
-
-
-
-.form-info-nhanvien p
-{
-    display: flex;
-    align-items: center;
-    justify-content: right;
-    padding: 10px 0px;
-}
-
-.form-info-nhanvien label
-{
-    width: 20%;
-    display: flex;
-    justify-content: right;
-    align-items: center;
-    padding: 0px 10px;
-    text-align: right;
-}
-
-.form-info-nhanvien input[type="text"], input[type="date"], input[type="password"]
-{
-    width: 65%;
-    padding: 10px 15px;
+    position: sticky;
+    top: 0;
+    z-index: 100; /* Để đè lên nội dung bên dưới */
     border-radius: 10px;
+}
+
+/* Bên trái: Tiêu đề hoặc Breadcrumb */
+.box-header-left h3 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+/* Bên phải: User Profile */
+.box-header-right {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* User Info Container */
+.user-profile {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 30px;
+    transition: background 0.3s;
+}
+
+.user-profile:hover {
+    background-color: #f0f0f5;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-color);
+    margin-right: 10px;
+}
+
+.user-name {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+/* Dropdown Menu (Ẩn mặc định) */
+.profile-dropdown {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 200px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    padding: 10px 0;
+    display: none; /* JS sẽ bật cái này */
+    flex-direction: column;
+    z-index: 101;
+    animation: fadeInDrop 0.2s ease-out;
+}
+
+.profile-dropdown.active {
+    display: flex;
+}
+
+/* Style cho các nút trong Dropdown */
+.profile-dropdown button {
+    background: none;
     border: none;
-    background-color: rgb(232, 229, 225);
-}
-
-.table-info-nv
-{
     width: 100%;
-    height: auto;
-    border: 1px solid skyblue;
-    text-align: center;
+    text-align: left;
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
 }
 
+.profile-dropdown button:hover {
+    background-color: #f5f5fa;
+    color: var(--primary-color);
+    padding-left: 25px; /* Hiệu ứng trượt nhẹ */
+}
 
-/* Đổi mật khẩu */
-.box-doi-password
-{
-    width: 40%;
-    height: auto;
+.profile-dropdown button i {
+    margin-right: 10px;
+}
+
+@keyframes fadeInDrop {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- MODAL (POPUP) ĐỔI MẬT KHẨU --- */
+/* Lớp phủ màn hình tối */
+.modal-overlay {
     position: fixed;
-    align-content: center;
-    top: 30%;
-    right: 30%;
-    border: none;
-    border-radius: 20px;
-    padding: 10px;
-    background-color: skyblue;
-}
-
-.title-doi-password
-{
-    color: rgb(65, 4, 109);
-    width: 100%;
-    text-align: center;
-}
-
-.form-doi-password
-{
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Nền tối mờ */
+    backdrop-filter: blur(4px); /* Làm mờ background phía sau */
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeInModal 0.3s;
 }
 
-.form-doi-password p
-{
-    width: 100% !important;
-    height: auto;
-    padding: 10px 0px;
-    align-content: center;
+/* Hộp nội dung Modal */
+.box-doi-password {
+    background: #fff;
+    width: 400px;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    position: relative;
+    text-align: center;
 }
 
-.box-doi-password input
-{
-    width: 100% !important;
-    margin-bottom: 10px;
+.title-doi-password {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Input Styles */
+.form-doi-password input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     box-sizing: border-box;
+    font-size: 14px;
+    transition: border 0.3s;
+}
+
+.form-doi-password input:focus {
+    border-color: var(--accent-color);
+    outline: none;
+}
+
+/* Button Submit Style */
+.form-doi-password button[name="btn_checkPassword"],
+.form-doi-password button[name="btn_RunDoiPassword"] {
+    background: linear-gradient(135deg, var(--primary-color), #2a0e75);
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: transform 0.2s;
+}
+
+.form-doi-password button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(30, 11, 93, 0.3);
+}
+
+/* Nút Close (X) */
+.btn-close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #999;
+    cursor: pointer;
+}
+.btn-close-modal:hover { color: red; }
+
+@keyframes fadeInModal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+
+/* --- CARD STYLE (Dùng chung cho các Box) --- */
+.card-box {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e0b5d; /* Màu tím đậm chủ đạo */
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f0f0f5;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+/* --- TABLE KẾT QUẢ TÌM KIẾM --- */
+.box-search-tv {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.box-search-tv th {
+    background: linear-gradient(135deg, #1e0b5d, #2a0e75);
+    color: #fff;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.box-search-tv td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    color: #555;
+    font-size: 14px;
+}
+
+.box-search-tv tr:last-child td {
+    border-bottom: none;
+}
+
+.box-search-tv tr:hover {
+    background-color: #f9f9fc;
+}
+
+/* --- FORM KHÓA TÀI KHOẢN --- */
+/* 1. Custom Radio Button (Dạng thẻ chọn) */
+.radio-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.radio-option {
+    position: relative;
+}
+
+.radio-option input[type="radio"] {
+    display: none; /* Ẩn nút radio mặc định */
+}
+
+.radio-option label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background: #f8f8fa;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+/* Hiệu ứng khi được chọn */
+.radio-option input[type="radio"]:checked + label {
+    border-color: #00d2d3; /* Màu Neon */
+    background: rgba(0, 210, 211, 0.05);
+    color: #009798;
+    box-shadow: 0 4px 10px rgba(0, 210, 211, 0.2);
+}
+
+/* 2. Form Inputs */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    font-size: 14px;
+    color: #333;
+    transition: all 0.3s;
+    box-sizing: border-box;
+}
+
+.form-control:focus {
+    border-color: #00d2d3;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 210, 211, 0.15);
+}
+
+/* Layout 2 cột cho ngày tháng */
+.row-date {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    display: none; /* Mặc định ẩn, dùng JS hiện lên */
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 3. Button Submit */
+.btn-submit {
+    background: linear-gradient(135deg, #ff4757, #ff6b81); /* Màu đỏ cảnh báo (vì là nút Khóa) */
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+    float: right; /* Đẩy sang phải */
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
+}
+
+.alert-msg {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+}
+.alert-error { background: #ffebee; color: #c62828; }
+.alert-success { background: #e8f5e9; color: #2e7d32; }
+
+/* Responsive nhỏ */
+@media (max-width: 768px) {
+    .content { margin-left: 0; padding: 15px; }
+    .radio-group, .row-date { grid-template-columns: 1fr; }
+}
+
+/* --- BOX SEARCH STYLE --- */
+.box-search {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Biến Form thành Flexbox để căn chỉnh hàng ngang */
+.box-search form {
+    display: flex;
+    align-items: center;
+    position: relative;
+    max-width: 600px; /* Giới hạn chiều rộng cho đẹp */
+}
+
+/* Ô nhập liệu (Input) */
+.box-search input[name="txt_searchTV"],
+.box-search input[name="txt_searchNV"] {
+    width: 100%;
+    padding: 15px 20px;
+    padding-right: 140px; /* Chừa chỗ cho nút bấm đè lên */
+    border-radius: 50px; /* Bo tròn hoàn toàn */
+    border: 1px solid #e0e0e0;
+    background-color: #f9f9fc; /* Màu nền xám cực nhạt */
+    font-size: 14px;
+    color: #333;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.02); /* Đổ bóng nhẹ vào trong */
+}
+
+/* Hiệu ứng khi click vào ô nhập */
+.box-search input[name="txt_searchTV"]:focus,
+.box-search input[name="txt_searchNV"]:focus {
+    background-color: #fff;
+    border-color: #00d2d3; /* Viền xanh Neon */
+    box-shadow: 0 0 0 4px rgba(0, 210, 211, 0.15); /* Hào quang xanh */
+    outline: none;
+}
+
+/* Nút bấm (Button) - Sẽ nằm đè lên bên phải ô Input */
+.box-search button[name="btn_searchTV"],
+.box-search button[name="btn_searchNV"] {
+    position: absolute;
+    right: 5px; /* Cách mép phải 5px */
+    top: 5px;
+    bottom: 5px;
+    background: linear-gradient(135deg, #1e0b5d, #00d2d3); /* Gradient Tím -> Xanh Neon */
+    color: #fff;
+    border: none;
+    border-radius: 40px; /* Bo tròn theo nút */
+    padding: 0 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Khoảng cách giữa icon và chữ */
+    box-shadow: 0 4px 10px rgba(30, 11, 93, 0.2);
+}
+
+/* Hiệu ứng Hover nút */
+.box-search button[name="btn_searchTV"]:hover,
+.box-search button[name="btn_searchNV"]:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(0, 210, 211, 0.4); /* Phát sáng khi hover */
+    background: linear-gradient(135deg, #2a0e75, #00e0e1);
+}
+
+.box-search button svg {
+    fill: currentColor;
+    width: 18px;
+    height: 18px;
 }

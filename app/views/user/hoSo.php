@@ -112,4 +112,7 @@
 
 <script src="/project-FindU/public/assets/js/hoSo.js"></script>
 <script src="/project-FindU/public/assets/js/ghepDoi.js"></script>
+
 <?php include_once __DIR__ . '/../includes/js.php'; ?>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

@@ -13,7 +13,10 @@
         <?php include_once __DIR__ . '/../admin/includes/sidebar.php'; ?>
         <div class="content">
             <?php include_once __DIR__ . '/../admin/includes/header.php'; ?>
-            <?php include_once __DIR__ . '/../admin/includes/search_thanhVien.php'; ?>
+            <div class="card-box">
+                <h3 class="card-title">Tìm kiếm thành viên</h3>
+                <?php include_once __DIR__ . '/../admin/includes/search_thanhVien.php'; ?>
+            </div>
             <?php
             if (isset($_POST['btn_searchTV'])) {
                 $maTV = $_POST['txt_searchTV'];
@@ -33,69 +36,26 @@
                         echo '<button type="button" class="btn_khoaTV">Khóa thành viên</button>';
                     }
                     ?>
-
-                    <button type="submit" class="btn_moKhoaTV" value="Mở khóa" name="btn_moKhoaTV">Mở khóa thành viên</button>
-
-
-                    <div class="box-form-khoa">
-                        <label for="rd_khoaVV">Khóa vĩnh viễn</label>
-                        <input type="radio" name="rd_khoa" id="rd_khoaVV" class="rd_khoaVV" value="Khóa vĩnh viễn">
-                        <label for="rd_khoaTH">Khóa có thời hạn</label>
-                        <input type="radio" name="rd_khoa" id="rd_khoaTH" class="rd_khoaTH" value="Khóa có thời hạn">
-
-                        <p class="mota">
-                            <label for="txt_mota">Mô tả</label>
-                            <input type="text" name="txt_mota" id="txt_mota" placeholder="Nhập mô tả tài khoản">
-                        </p>
-
-                        <div class="timeKhoa">
-                            <p>
-                                <label for="txt_ngayKhoa">Ngày khóa</label>
-                                <input type="date" name="txt_ngayKhoa" id="txt_ngayKhoa">
-                            </p>
-                            <p>
-                                <label for="txt_ngayMoKhoa">Ngày mở khóa</label>
-                                <input type="date" name="txt_ngayMoKhoa" id="txt_ngayMoKhoa">
-                            </p>
-                        </div>
-                        <p>
-                            <button type="submit" name="sb_apdungkhoa" class="sb_apdungkhoa" value="sb_apdungkhoa">khóa</button>
-                        </p>
+                    <div style="overflow: hidden; margin: 20px 0px;">
+                        <button type="submit" class="btn_moKhoaTV btn-submit" value="Mở khóa" name="btn_moKhoaTV">Mở khóa thành viên</button>
                     </div>
                 </form>
 
                 <?php
-                if (isset($_POST['sb_apdungkhoa'])) {
-                    if (isset($_POST['rd_khoa'])) {
-                        $loaiKhoa = $_POST['rd_khoa'];
-                        $moTa = $_POST['txt_mota'];
-                        $ngayKhoa = $_POST['txt_ngayKhoa'] . " 00:00:00";
-                        $ngayMoKhoa = $_POST['txt_ngayMoKhoa'];
-                        if ($loaiKhoa == "Khóa vĩnh viễn" && $moTa != "" || $loaiKhoa == "Khóa có thời hạn" && $moTa != "" && $ngayKhoa != "" && $ngayMoKhoa != "") {
-                            $nv->khoaThanhVien($_SESSION['maTV_Khoa'], $moTa, $ngayKhoa, $ngayMoKhoa, $loaiKhoa);
-                            unset($_SESSION['maTV_Khoa']);
-                        } else {
-                            echo "Vui lòng nhập đầy đủ thông tin!";
-                        }
-                    } else {
-                        echo "Vui lòng chọn loại khóa!";
-                    }
-                }
-
                 if (isset($_POST['btn_moKhoaTV']) == "Mở khóa") {
                     if (isset($_SESSION['maTV_Khoa'])) {
                         $nv->moKhoaThanhVien($_SESSION['maTV_Khoa']);
                         unset($_SESSION['maTV_Khoa']);
                     } else {
-                        echo 'Vui lòng tìm tài khoản thành viên cần mở khóa!';
+                        echo '<div class="alert-msg alert-error">Vui lòng tìm tài khoản thành viên cần mở khóa!</div>';
                     }
                 }
                 ?>
 
             </div>
+            <?php include_once __DIR__ . '/../admin/includes/footer.php'; ?>
         </div>
     </div>
-    <?php include_once __DIR__ . '/../admin/includes/footer.php'; ?>
 </body>
 
 </html>

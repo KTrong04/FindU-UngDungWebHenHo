@@ -14,9 +14,9 @@
         <?php include_once __DIR__ . '/../admin/includes/sidebar.php'; ?>
         <div class="content">
             <?php include_once __DIR__ . '/../admin/includes/header.php'; ?>
+            <?php include_once __DIR__ . '/../admin/includes/footer.php'; ?>
         </div>
     </div>
-    <?php include_once __DIR__ . '/../admin/includes/footer.php'; ?>
 </body>
 
 </html>

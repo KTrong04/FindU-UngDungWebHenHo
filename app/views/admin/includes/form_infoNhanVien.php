@@ -3,6 +3,10 @@ require_once __DIR__ . '/../../../controllers/nhanVienQLController.php';
 $nvql = new nhanVienQLController();
 ?>
 
+<head>
+    <link rel="stylesheet" href="/project-FindU/public/assets/css/admin_form_info.css">
+</head> 
+
 <div class="box-form-info-nhanvien">
     <h1 class="title-form-info-nv">Thêm nhân viên mới</h1>
     <form action="" method="post" class="form-info-nhanvien">
