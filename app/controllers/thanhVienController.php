@@ -535,10 +535,10 @@ class thanhVienController
             if (!isset($_GET['sidebar']) || $detail['maTV'] != $_SESSION['user_maTV']) {
                 echo '<div class="info-box-infodetailes">
                         <a href="trangChu.php?action=block&id_bi_chan=' . $maTV_item . '" 
-                        onclick="return confirm(\'Bạn có chắc chắn muốn chặn ' . $hoTen . ' không?\')" 
-                        class="btn_infodetailes" 
-                        style="text-decoration: none; display: inline-block; text-align: center;">
-                        Chặn ' . $hoTen . '
+                            onclick="return confirm(\'Bạn có chắc chắn muốn chặn ' . $hoTen . ' không?\')" 
+                            class="btn_infodetailes" 
+                            style="text-decoration: none; display: inline-block; text-align: center;">
+                            Chặn ' . $hoTen . '
                         </a>
                     </div>';
             }
@@ -673,6 +673,65 @@ class thanhVienController
                                 </div> 
                                 <div class="modal-footer sticky-footer">
                                     <button type="submit" name="btnUpdateInfo" class="btn-tinder-save">Lưu</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>';
+        echo '
+                <div id="reportModal" class="modal-overlay" style="display:none; z-index: 9999;">
+                    <div class="modal-content tinder-style" style="max-width: 450px; border-radius: 16px; overflow: hidden;">
+                        <div class="main-modal-content">
+                            
+                            <div class="modal-header" style="border-bottom: 1px solid #f0f0f0; padding: 15px 20px;">
+                                <h3>Báo cáo ' . $hoTen . '</h3>
+                                <span class="close-modal" onclick="closeReportModal()" style="font-size: 24px; color: #999;">&times;</span>
+                            </div>
+                            
+                            <form action="" method="POST">
+                                <input type="hidden" name="id_bi_bao_cao" value="' . $maTV_item . '">
+                                <input type="hidden" name="ten_bi_bao_cao" value="' . $hoTen . '">
+                                
+                                <div class="modal-body-scroll" style="padding: 20px;">
+                                    <p style="color: #666; margin-bottom: 20px; font-size: 15px;">
+                                        Hãy chọn lý do bạn muốn báo cáo hồ sơ này. Chúng tôi sẽ giữ bí mật thông tin của bạn.
+                                    </p>
+                                    
+                                    <div class="report-reason-list">
+                                        <label class="reason-item">
+                                            <input type="radio" name="reason" value="quayroi" required>
+                                            <span class="reason-content">Quấy rối / Tin nhắn thô lỗ</span>
+                                        </label>
+                                        
+                                        <label class="reason-item">
+                                            <input type="radio" name="reason" value="giamao">
+                                            <span class="reason-content">Tài khoản giả mạo / Lừa đảo</span>
+                                        </label>
+                                        
+                                        <label class="reason-item">
+                                            <input type="radio" name="reason" value="nhaycam">
+                                            <span class="reason-content">Ảnh hoặc nội dung không phù hợp</span>
+                                        </label>
+                                        
+                                        <label class="reason-item">
+                                            <input type="radio" name="reason" value="spam">
+                                            <span class="reason-content">Spam / Quảng cáo bán hàng</span>
+                                        </label>
+
+                                        <label class="reason-item">
+                                            <input type="radio" name="reason" value="khac">
+                                            <span class="reason-content">Lý do khác</span>
+                                        </label>
+                                    </div>
+
+                                    <textarea name="additional_info" class="custom-textarea" rows="3" placeholder="Chia sẻ thêm chi tiết (nếu có)..."></textarea>
+                                </div>
+                                
+                                <div class="modal-footer sticky-footer" style="padding: 15px 20px; border-top: 1px solid #f0f0f0;">
+                                    <button type="submit" name="btnSendReport" class="btn-tinder-save" 
+                                            style="background: linear-gradient(260deg, #ff6b6b 0%, #ff4458 100%); width: 100%; border-radius: 99px; font-weight: 700;">
+                                        Gửi báo cáo
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -875,5 +934,34 @@ class thanhVienController
     public function check_Chat($maTV1_user, $maTV_chat)
     {
         return $this->repo->check_capDoi($maTV1_user, $maTV_chat);
+    }
+
+    // Trong Class Controller (Ví dụ: ThanhVienController.php)
+
+    public function baoCaoThanhVien($nguoi_bao_cao_id, $nguoi_bi_bao_cao_id, $ten_nguoi_bi_bao_cao, $ly_do, $chi_tiet)
+    {
+        // 1. Validate dữ liệu cơ bản
+        if (empty($nguoi_bi_bao_cao_id) || empty($ly_do)) {
+            echo $this->helper->message('error', 'Dữ liệu không hợp lệ.');
+            return;
+        }
+
+        // 2. Chuẩn bị nội dung mô tả
+        // Vì bảng DB chỉ có cột 'moTa', ta gộp tên và chi tiết vào đây cho dễ đọc
+        $noi_dung_day_du = "Tên người bị báo cáo: " . $ten_nguoi_bi_bao_cao . ". \n";
+        $noi_dung_day_du .= "Chi tiết: " . $chi_tiet;
+
+        // 3. Gọi Repository để lưu vào DB
+        // Truyền: Người báo cáo, Người bị báo cáo, Lý do (ENUM), Mô tả chi tiết
+        $result = $this->repo->add_baoCaoThanhVien($nguoi_bao_cao_id, $nguoi_bi_bao_cao_id, $ly_do, $noi_dung_day_du);
+
+        // 4. Phản hồi ra giao diện
+        if ($result) {
+            // Có thể redirect hoặc reload lại trang để tránh gửi lại form khi F5
+            echo $this->helper->message('success', 'Báo cáo đã được gửi thành công. Cảm ơn bạn đã giúp chúng tôi giữ cộng đồng an toàn.');
+            // header("Refresh:2"); // Tự động reload sau 2s nếu cần
+        } else {
+            echo $this->helper->message('error', 'Gửi báo cáo thất bại, vui lòng thử lại sau.');
+        }
     }
 }

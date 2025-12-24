@@ -5,7 +5,7 @@ $nv = new nhanVienController();
 
 <div class="box-search">
     <form method="post">
-        <input type="text" name="txt_searchTV" placeholder="Nhập mã thành viên cần tìm..." autocomplete="off" />
+        <input type="text" name="txt_searchTV" value="<?php echo isset($_GET['maTV_xl']) ? $_GET['maTV_xl'] : ''; ?>" placeholder="Nhập mã thành viên cần tìm..." autocomplete="off" />
         
         <button type="submit" name="btn_searchTV" value="Tìm kiếm">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

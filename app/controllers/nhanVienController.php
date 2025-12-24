@@ -157,4 +157,19 @@ class nhanVienController
         }
         echo '</select>';
     }
+
+    public function list_baoCao()
+    {
+        return $this->repo->find_all_baoCao();
+    }
+
+    public function sum_list_baoCao($trangThai)
+    {
+        return $this->repo->count_baoCao($trangThai);
+    }
+
+    public function ignore_baoCao($maBC)
+    {
+        return $this->repo->update_ignore_baoCao($maBC);
+    }
 }

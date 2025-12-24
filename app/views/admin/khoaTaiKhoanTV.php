@@ -21,32 +21,47 @@
                 <?php include_once __DIR__ . '/../admin/includes/search_thanhVien.php'; ?>
 
                 <?php
-                if (isset($_POST['btn_searchTV'])) {
-                    $maTV = $_POST['txt_searchTV'];
-                    $userData = $nv->searchThanhVien($maTV);
+                // 1. Khởi tạo biến mã thành viên cần tìm
+                $maTV_can_tim = null;
 
+                // TRƯỜNG HỢP 1: Người dùng nhập tay và bấm nút Tìm kiếm
+                if (isset($_POST['btn_searchTV'])) {
+                    $maTV_can_tim = $_POST['txt_searchTV'];
+                }
+                // TRƯỜNG HỢP 2: Được chuyển hướng từ trang Báo cáo (qua URL)
+                elseif (isset($_GET['maTV_xl'])) {
+                    $maTV_can_tim = $_GET['maTV_xl'];
+                }
+
+                // 2. Nếu có mã thành viên thì thực hiện tìm kiếm
+                if (!empty($maTV_can_tim)) {
+                    // Gọi hàm tìm kiếm từ Model
+                    $userData = $nv->searchThanhVien($maTV_can_tim);
+    
                     if (isset($userData) && !empty($userData)) {
-                        // Lưu mã TV vào session để dùng cho việc khóa sau này
+                        // QUAN TRỌNG: Lưu vào Session để dùng cho form xử lý khóa bên dưới
                         $_SESSION['maTV_Khoa'] = $userData['maTV'];
 
+                        // Hiển thị bảng thông tin
+                        echo '<div class="alert-msg alert-success">Đã tìm thấy thông tin thành viên cần xử lý.</div>';
                         echo '<table class="box-search-tv">';
                         echo '<thead><tr>
-                                    <th>Mã TV</th>
-                                    <th>Họ tên</th>
-                                    <th>Giới tính</th>
-                                    <th>Tuổi</th>
-                                    <th>Trạng thái</th>
-                                  </tr></thead>';
-                        echo '<tbody><tr>
-                                    <td>' . $userData['maTV'] . '</td>
-                                    <td>' . $userData['hoTen'] . '</td>
-                                    <td>' . $userData['gioiTinh'] . '</td>
-                                    <td>' . $userData['tuoi'] . '</td>
-                                    <td><span style="font-weight:bold; color:' . ($userData['trangThai'] == 'Bị khóa' ? 'red' : 'green') . '">' . $userData['trangThai'] . '</span></td>
-                                  </tr></tbody>';
+                                <th>Mã TV</th>
+                                <th>Họ tên</th>
+                                <th>Giới tính</th>
+                                <th>Tuổi</th>
+                                <th>Trạng thái hiện tại</th>
+                            </tr></thead>';
+                                        echo '<tbody><tr>
+                                <td>' . $userData['maTV'] . '</td>
+                                <td>' . $userData['hoTen'] . '</td>
+                                <td>' . $userData['gioiTinh'] . '</td>
+                                <td>' . $userData['tuoi'] . '</td>
+                                <td><span style="font-weight:bold; color:' . ($userData['trangThai'] == 'Bị khóa' ? 'red' : 'green') . '">' . $userData['trangThai'] . '</span></td>
+                            </tr></tbody>';
                         echo '</table>';
                     } else {
-                        echo '<p class="alert-msg alert-error">Không tìm thấy thành viên có mã: ' . $maTV . '</p>';
+                        echo '<p class="alert-msg alert-error">Không tìm thấy thành viên có mã: ' . $maTV_can_tim . '</p>';
                     }
                 }
                 ?>
@@ -113,6 +128,13 @@
                                 // Gọi hàm trong Model
                                 $nv->khoaThanhVien($_SESSION['maTV_Khoa'], $moTa, $ngayKhoa, $ngayMoKhoa, $loaiKhoa);
                                 echo '<div class="alert-msg alert-success">Đã khóa thành công thành viên ' . $_SESSION['maTV_Khoa'] . '!</div>';
+
+                                // cập nhật trạng thái của tất cả yêu cầu báo cáo thành da_duyet
+                                if (!empty($maTV_can_tim) && isset($_GET['maBC_xl']))
+                                {
+                                    $nv->ignore_baoCao($_GET['maBC_xl']);
+                                }
+                                
                             } else {
                                 echo '<div class="alert-msg alert-error">Vui lòng nhập đầy đủ thông tin (Ngày bắt đầu & kết thúc nếu khóa có thời hạn)!</div>';
                             }
@@ -123,7 +145,7 @@
                     ?>
                 <?php endif; ?>
                 <?php include_once __DIR__ . '/../admin/includes/footer.php'; ?>
-            </div>
+                </div>
         </div>
     </div>
 

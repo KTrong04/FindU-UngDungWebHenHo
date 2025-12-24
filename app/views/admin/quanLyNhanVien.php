@@ -73,11 +73,14 @@
                             </form>';
                 }
 
-                if (isset($_GET['delete_sidebar']) || isset($_GET['managerment_sidebar'])) {
-                    echo    '<form action="" method="post" style="overflow: hidden; margin-top: 20px;">
+                if ($_SESSION['maNV_search'] != $_SESSION['admin_maNV']) {
+                    if (isset($_GET['delete_sidebar']) || isset($_GET['managerment_sidebar'])) {
+                        echo    '<form action="" method="post" style="overflow: hidden; margin-top: 20px;">
                                 <button type="submit" name="btn_deleteNV" value="deleteNV" class="btn-submit">Xóa nhân viên</button>
                             </form>';
+                    }
                 }
+
                 ?>
 
             </div>
