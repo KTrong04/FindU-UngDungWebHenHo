@@ -110,7 +110,7 @@ class nhanVienRepositories
     public function find_password_now($maNV)
     {
         $sql = "SELECT password FROM nhanvien WHERE maNV = :maNV";
-        $stmt=  $this->conn->prepare($sql);
+        $stmt =  $this->conn->prepare($sql);
         $stmt->bindParam(':maNV', $maNV);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -121,7 +121,7 @@ class nhanVienRepositories
         $sql = "UPDATE nhanvien 
                 SET password = :password
                 WHERE maNV = :maNV";
-        $stmt=  $this->conn->prepare($sql);
+        $stmt =  $this->conn->prepare($sql);
         $stmt->bindParam(':maNV', $maNV);
         $stmt->bindParam(':password', $passwordnew);
         return $stmt->execute();
@@ -136,5 +136,54 @@ class nhanVienRepositories
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // baocao db
+    // Trong file Repository
+    public function find_all_baoCao()
+    {
+        // Sử dụng ALIAS (AS) để đổi tên cột cho khớp với Code View của bạn
+        // JOIN 2 lần với bảng thanhvien: 
+        // - tv1 là người báo cáo
+        // - tv2 là người bị báo cáo
+        $sql = "SELECT 
+                b.maBC AS id,
+                b.loaiViPham AS reason,
+                b.moTa AS `desc`, 
+                b.trangThai AS status,
+                b.thoiGianBaoCao AS time,
+                tv1.hoTen AS reporter,
+                tv2.hoTen AS accused,
+                tv2.maTV AS accused_id
+            FROM baocao b
+            LEFT JOIN thanhvien tv1 ON b.maTV = tv1.maTV
+            LEFT JOIN thanhvien tv2 ON b.maTV_bi_bao_cao = tv2.maTV
+            ORDER BY b.thoiGianBaoCao DESC";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function count_baoCao($trangThai)
+    {
+        $sql = "SELECT COUNT(*) AS count FROM baocao WHERE trangThai = :status";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':status', $trangThai);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['count'];
+    }
+
+    public function update_ignore_baoCao($maBC)
+    {
+        $sql = "UPDATE baocao 
+                SET trangThai = :status
+                WHERE maBC = :maBC";
+        $stmt =  $this->conn->prepare($sql);
+        $stmt->bindParam(':maBC', $maBC);
+        $stmt->bindValue(':status', 'da_duyet');
+        return $stmt->execute();
     }
 }

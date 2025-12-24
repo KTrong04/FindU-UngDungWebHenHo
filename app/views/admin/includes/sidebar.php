@@ -8,6 +8,17 @@
     <ul class="menu">
         <li class="items has-submenu">
             <div class="menu-title">
+                <a href="/project-FindU/app/views/admin/duyetBaoCao.php">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="nav-icon" width="24" height="24" fill="currentColor">
+                        <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" opacity="0.3"></path>
+                        <path d="M12 15c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm0 4c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm1-5h-2v-4h2v4z"></path>
+                    </svg>
+                    Duyệt yêu cầu báo cáo
+                </a>
+            </div>
+        </li>
+        <li class="items has-submenu">
+            <div class="menu-title">
                 <a href="javascript:void(0);" class="menu-toggle">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="nav-icon">
                         <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h7v-2.5c0-1.33 1.07-2.5 2.67-2.5.21 0 .42.02.62.05C10.51 13.56 9.36 13 8 13z" opacity="0.3"></path>

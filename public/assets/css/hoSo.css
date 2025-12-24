@@ -1,10 +1,13 @@
 /* Modal Overlay (Nền tối) */
 .modal-overlay {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: rgba(0, 0, 0, 0.6);
-    z-index: 9999; /* Đảm bảo nằm trên cùng */
+    z-index: 9999;
+    /* Đảm bảo nằm trên cùng */
     display: none;
     align-items: center;
     justify-content: center;
@@ -17,7 +20,7 @@
     max-width: 500px;
     border-radius: 15px;
     padding: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     animation: slideDown 0.3s ease;
 }
 
@@ -27,13 +30,21 @@
 }
 
 @keyframes slideDown {
-    from { transform: translateY(-50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 /* --- TINDER MODAL STYLE --- */
 .modal-content.tinder-style {
-    background: #f0f2f4; /* Nền xám nhẹ */
+    background: #f0f2f4;
+    /* Nền xám nhẹ */
     padding: 0;
     border-radius: 15px;
     overflow: hidden;
@@ -47,7 +58,8 @@
     padding: 15px 20px;
     border-bottom: 1px solid #eee;
     display: flex;
-    justify-content: center; /* Căn giữa tiêu đề */
+    justify-content: center;
+    /* Căn giữa tiêu đề */
     position: relative;
 }
 
@@ -60,7 +72,8 @@
 .close-modal {
     position: absolute;
     right: 20px;
-    width: 30px; height: 30px;
+    width: 30px;
+    height: 30px;
     font-size: 28px;
     color: #d4d8e2;
     cursor: pointer;
@@ -116,8 +129,10 @@
 }
 
 .main-photo {
-    grid-row: 1 / 3; /* Ảnh chính chiếm 2 hàng dọc */
-    border: 4px dashed #c6c6c7 !important; /* Viền đứt nét màu hồng */
+    grid-row: 1 / 3;
+    /* Ảnh chính chiếm 2 hàng dọc */
+    border: 4px dashed #c6c6c7 !important;
+    /* Viền đứt nét màu hồng */
 }
 
 .img-cover {
@@ -138,19 +153,20 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: 0.1s ease-in;
 }
 
 .btn-add-photo:hover {
-    transform: scale(1.2); /* Phóng to nhẹ khi di chuột */
+    transform: scale(1.2);
+    /* Phóng to nhẹ khi di chuột */
 }
 
 .photo-tag {
     position: absolute;
     top: 10px;
     left: 10px;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     color: #fff;
     padding: 2px 8px;
     border-radius: 10px;
@@ -180,8 +196,17 @@
     border-radius: 10px;
     margin: 5px 0px;
 }
-.tinder-input-group:first-of-type { border-top-left-radius: 10px; border-top-right-radius: 10px; }
-.tinder-input-group:last-of-type { border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; border-bottom: none; }
+
+.tinder-input-group:first-of-type {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.tinder-input-group:last-of-type {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom: none;
+}
 
 .tinder-input-group label {
     display: block;
@@ -191,7 +216,8 @@
     margin-bottom: 2px;
 }
 
-.tinder-input-group input, .tinder-input-group textarea {
+.tinder-input-group input,
+.tinder-input-group textarea {
     width: 100%;
     border: none;
     outline: none;
@@ -210,14 +236,16 @@
 }
 
 .tag-item input[type="checkbox"] {
-    display: none; /* Ẩn checkbox xấu xí */
+    display: none;
+    /* Ẩn checkbox xấu xí */
 }
 
 .tag-content {
     display: inline-block;
     padding: 8px 16px;
     border: 1px solid #ccc;
-    border-radius: 50px; /* Bo tròn dạng viên thuốc */
+    border-radius: 50px;
+    /* Bo tròn dạng viên thuốc */
     font-size: 14px;
     color: #555;
     cursor: pointer;
@@ -227,10 +255,12 @@
 }
 
 /* Khi Checkbox được chọn -> Đổi màu Label */
-.tag-item input:checked + .tag-content {
+.tag-item input:checked+.tag-content {
     border-color: #fe3c72;
-    color: #fe3c72; /* Màu chữ hồng */
-    background: rgba(254, 60, 114, 0.1); /* Nền hồng nhạt */
+    color: #fe3c72;
+    /* Màu chữ hồng */
+    background: rgba(254, 60, 114, 0.1);
+    /* Nền hồng nhạt */
     font-weight: 700;
 }
 
@@ -244,7 +274,8 @@
 }
 
 .btn-tinder-save {
-    background: linear-gradient(45deg, #fd267a, #ff6036); /* Gradient màu Tinder */
+    background: linear-gradient(45deg, #fd267a, #ff6036);
+    /* Gradient màu Tinder */
     color: white;
     width: 100%;
     padding: 14px;
@@ -258,4 +289,125 @@
 
 .btn-tinder-save:active {
     transform: scale(0.98);
+}
+
+/* --- CSS cho Modal Báo Cáo & Nút Hành Động --- */
+
+/* Container chứa 2 nút hành động */
+.action-buttons-group {
+    display: flex;
+    gap: 12px;
+    padding: 10px 20px 20px;
+    /* Cách lề dưới một chút */
+    justify-content: center;
+}
+
+.btn-action {
+    flex: 1;
+    padding: 12px;
+    border-radius: 99px;
+    /* Bo tròn kiểu viên thuốc */
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid #e0e0e0;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: #424242;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Style riêng cho nút Chặn */
+.btn-action.block {
+    color: #757575;
+}
+
+.btn-action.block:hover {
+    background: #f5f5f5;
+    border-color: #d0d0d0;
+}
+
+/* Style riêng cho nút Báo cáo */
+.btn-action.report {
+    color: #ff4458;
+    /* Màu đỏ Tinder */
+    border-color: #ff4458;
+}
+
+.btn-action.report:hover {
+    background: #fff0f1;
+    /* Màu nền đỏ nhạt khi hover */
+}
+
+/* --- Style lại Modal --- */
+.report-reason-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.reason-item {
+    position: relative;
+    cursor: pointer;
+}
+
+/* Ẩn input radio mặc định xấu xí */
+.reason-item input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Tạo giao diện thay thế cho radio */
+.reason-content {
+    display: block;
+    padding: 14px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    color: #424242;
+    font-weight: 500;
+    transition: all 0.2s;
+    background: #fff;
+}
+
+/* Hiệu ứng khi được chọn */
+.reason-item input[type="radio"]:checked+.reason-content {
+    border-color: #ff4458;
+    background-color: #fff0f1;
+    color: #ff4458;
+    font-weight: 700;
+    box-shadow: 0 0 0 1px #ff4458 inset;
+    /* Viền đôi cho đậm */
+}
+
+/* Textarea style */
+.custom-textarea {
+    width: 100%;
+    margin-top: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 12px;
+    font-family: inherit;
+    font-size: 14px;
+    resize: none;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.custom-textarea:focus {
+    border-color: #ff4458;
+}
+
+/* Header modal đẹp hơn */
+.modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #212121;
 }

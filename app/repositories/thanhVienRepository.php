@@ -607,4 +607,27 @@ class thanhVienRepository
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    // Báo cáo thành viên
+    // Trong Class Repository (Ví dụ: ThanhVienRepository.php)
+
+    public function add_baoCaoThanhVien($maTV, $maTV_bi_bao_cao, $loaiViPham, $moTa)
+    {
+        // Kiểm tra xem $loaiViPham có nằm trong danh sách ENUM cho phép không để tránh lỗi SQL
+        $allowed_reasons = ['quayroi', 'giamao', 'nhaycam', 'spam', 'khac'];
+        if (!in_array($loaiViPham, $allowed_reasons)) {
+            $loaiViPham = 'khac'; // Mặc định về 'khac' nếu value gửi lên sai
+        }
+
+        // Câu lệnh SQL (Cập nhật theo cấu trúc bảng mới ở mục 1)
+        $sql = "INSERT INTO baocao (maTV, maTV_bi_bao_cao, loaiViPham, moTa, trangThai, thoiGianBaoCao) 
+            VALUES (:maTV, :maTV_bi_bao_cao, :loaiViPham, :moTa, 'cho_duyet', NOW())";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':maTV', $maTV, PDO::PARAM_INT);
+        $stmt->bindParam(':maTV_bi_bao_cao', $maTV_bi_bao_cao, PDO::PARAM_INT);
+        $stmt->bindParam(':loaiViPham', $loaiViPham, PDO::PARAM_STR);
+        $stmt->bindParam(':moTa', $moTa, PDO::PARAM_STR);
+        return $stmt->execute();
+    }
 }

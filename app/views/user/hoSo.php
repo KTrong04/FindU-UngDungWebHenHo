@@ -34,6 +34,17 @@
 
             $tv->capNhatHoSo($_SESSION['user_maTV'], $anhDaiDien, $hinh, $hoTen, $hocVan, $diaChi, $bio, $soThich, $tuoi);
           }
+
+          // Kiểm tra đúng tên nút submit là 'btnSendReport' (như trong HTML)
+          if (isset($_POST['btnSendReport'])) {
+            $id_bi_bao_cao = $_POST['id_bi_bao_cao'];
+            $ten_bi_bao_cao = isset($_POST['ten_bi_bao_cao']) ? $_POST['ten_bi_bao_cao'] : 'Người dùng ẩn danh';
+            $ly_do = $_POST['reason'];
+            $chi_tiet = $_POST['additional_info'];
+
+            $tv->baoCaoThanhVien($_SESSION['user_maTV'], $id_bi_bao_cao, $ten_bi_bao_cao, $ly_do, $chi_tiet);
+          }
+
           echo '<div class="stage stage-hoSo">
                     <div class="cards" id="cards">';
           $ma = !empty($_GET['id_profile']) ? $_GET['id_profile'] : $_SESSION['user_maTV'];
@@ -41,9 +52,9 @@
           echo '</div>';
           if (!isset($_GET['sidebar']) || $ma != $_SESSION['user_maTV']) {
             $ck_capDoi = $tv->check_capDoi($_SESSION['user_maTV'], $ma);
+            echo '<div class="controls" style="width:100%;">';
             if ($ck_capDoi == false) {
               echo <<<HTML
-                    <div class="controls" style="width:100%;">
                       <button class="btn" id="noBtn" title="Nope">
                           <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" focusable="false" role="img">
                             <defs>
@@ -88,10 +99,25 @@
                               </g>
                           </svg>
                       </button>
-                    </div>
-                  </div> 
                   HTML;
             }
+
+            echo '<button type="button" onclick="openReportModal()" class="btn" title="Báo cáo">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <defs>
+                          <linearGradient id="gradReport" x1="10%" y1="20%" x2="80%" y2="100%">
+                              <stop offset="0%" stop-color="#ff6036" />
+                              <stop offset="100%" stop-color="#fd267a" />
+                            </linearGradient>
+                      </defs>
+                      <g fill="url(#gradReport)" stroke="none">
+                          <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+                      </g>
+                      <line x1="4" y1="3" x2="4" y2="30" stroke="#7c7c7c"></line>
+                      </svg>
+                  </button>
+                </div>
+              </div> ';
           } else {
             echo '<div class="controls" style="width:100%; position:absolute; bottom:20px; display:flex; justify-content:center; z-index:10;">
                     <button class="btn" id="editBtn" onclick="openEditModal()" title="Chỉnh sửa Profile" style="background:#fff; padding:15px; border-radius:50%; box-shadow:0 5px 15px rgba(0,0,0,0.1);">
@@ -117,3 +143,25 @@
 <?php include_once __DIR__ . '/../includes/js.php'; ?>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  function openReportModal() {
+    document.getElementById('reportModal').style.display = 'flex';
+  }
+
+  function closeReportModal() {
+    document.getElementById('reportModal').style.display = 'none';
+  }
+
+  // Đóng modal khi click ra ngoài vùng modal
+  window.onclick = function(event) {
+    let reportModal = document.getElementById('reportModal');
+    let editModal = document.getElementById('editProfileModal');
+    if (event.target == reportModal) {
+      closeReportModal();
+    }
+    if (event.target == editModal) {
+      closeEditModal();
+    }
+  }
+</script>
