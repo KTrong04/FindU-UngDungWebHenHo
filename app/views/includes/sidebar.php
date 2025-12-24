@@ -64,8 +64,8 @@
             if ($tv->checkPasswordNow($pass, $_SESSION['user_maTV']) == true) {
                 echo '<div class="box-doi-password">';
                 echo    '<h1 class="title-doi-password">Đổi mật khẩu</h1>
-                        <form method="post" class="form-doi-password"> <button type="submit">X</button>';
-                echo            '<p><lable for="txt_passwordnew">Nhập lại mật khẩu</label><input type="password" name="txt_passwordnew" placeholder="Nhập mật khẩu mới"> </p>
+                        <form method="post" class="form-doi-password"> <button type="submit">X</button></form>';
+                echo            '<form method="post" class="form-doi-password"><p><lable for="txt_passwordnew">Nhập lại mật khẩu</label><input type="password" name="txt_passwordnew" placeholder="Nhập mật khẩu mới"> </p>
                             <p><lable for="txt_repasswordnew">Nhập lại mật khẩu</label><input type="password" name="txt_repasswordnew" placeholder="Nhập lại mật khẩu mới"></p>';
                 echo            '<p><button type="submit" name="btn_RunDoiPassword">Đổi mật khẩu</button></p>';
                 echo        '</form>
