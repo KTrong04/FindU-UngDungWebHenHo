@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/project-FindU/public/assets/css/admin_form_info.css">
 </head>
 
 <body>
@@ -14,26 +15,26 @@
         <div class="content">
             <?php include_once __DIR__ . '/../admin/includes/header.php';
             $nvql->run_confignChucVu(); ?>
+            <?php
+            if (isset($_POST['btn_update_info_nv']) && isset($_SESSION['maNV_search'])) {
+                $hoTen = $_POST['txt_hoTen'];
+                $ngaySinh = $_POST['txt_ngaySinh'];
+                $gioiTinh = isset($_POST['rd_gioiTinh']) ? $_POST['rd_gioiTinh'] : "";
+                $sdt = $_POST['txt_sdt'];
+                $email = $_POST['txt_email'];
+                $diaChi = $_POST['txt_diaChi'];
+                $chucVu = $_POST['se_chucVu'];
+                $phongBan = $_POST['se_phongban'];
+                $nvql->capNhatThongTinNV($_SESSION['maNV_search'], $hoTen, $ngaySinh, $gioiTinh, $sdt, $email, $diaChi, $chucVu, $phongBan);
+            }
+            
+            if (isset($_GET['btn_updateNV'])) {
+                $nvql->infoNV_update();
+            }
+            ?>
+            <?php include_once __DIR__ . '/../admin/includes/footer.php'; ?>
         </div>
-        <?php
-        if (isset($_GET['btn_updateNV'])) {
-            $nvql->infoNV_update();
-        }
-
-        if (isset($_POST['btn_update_info_nv']) && isset($_SESSION['maNV_search'])) {
-            $hoTen = $_POST['txt_hoTen'];
-            $ngaySinh = $_POST['txt_ngaySinh'];
-            $gioiTinh = isset($_POST['rd_gioiTinh']) ? $_POST['rd_gioiTinh'] : "";
-            $sdt = $_POST['txt_sdt'];
-            $email = $_POST['txt_email'];
-            $diaChi = $_POST['txt_diaChi'];
-            $chucVu = $_POST['se_chucVu'];
-            $phongBan = $_POST['se_phongban'];
-            $nvql->capNhatThongTinNV($_SESSION['maNV_search'], $hoTen, $ngaySinh, $gioiTinh, $sdt, $email, $diaChi, $chucVu, $phongBan);
-        }
-        ?>
     </div>
-    <?php include_once __DIR__ . '/../admin/includes/footer.php'; ?>
 </body>
 
 </html>

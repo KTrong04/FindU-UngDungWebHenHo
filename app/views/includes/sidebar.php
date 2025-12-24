@@ -19,7 +19,7 @@
                 <ul class="sidebar-content-menu">
                     <li class="sidebar-content-items" onclick="border_items(this); loadBox('tuongHop')">Các Tương Hợp</li>
                     <li class="sidebar-content-items" onclick="border_items(this); loadBox('tinNhan')">Tin Nhắn</li>
-                    <li class="sidebar-content-items" onclick="border_items(this); loadBox('thongBao')">Thông báo</li>
+                    <!-- <li class="sidebar-content-items" onclick="border_items(this); loadBox('thongBao')">Thông báo</li> -->
                 </ul>
             </div>
             <div class="sidebar-box-main">

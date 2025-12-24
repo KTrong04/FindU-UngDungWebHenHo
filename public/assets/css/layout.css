@@ -2,6 +2,10 @@
     margin: 0;
 }
 
+a {
+    text-decoration: none;
+}
+
 /* Quicksand */
 @font-face {
     font-family: "Quicksand";
@@ -242,42 +246,151 @@ header .menu-index .items a {
     display: block;
 }
 
-/* Đổi mật khẩu */
+/* --- 1. Hộp Modal chính (Căn giữa & Hiệu ứng VIP) --- */
 .box-doi-password {
-    width: 40%;
-    height: auto;
     position: fixed;
-    align-content: center;
-    top: 200px;
-    right: 30%;
-    border: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Căn giữa chính xác mọi màn hình */
+    width: 90%;
+    max-width: 420px;
+    /* Giới hạn chiều rộng chuẩn mobile/desktop */
+    background: #ffffff;
     border-radius: 20px;
-    padding: 10px;
-    background-color: skyblue;
+    /* Bo góc mềm mại */
+    padding: 30px 40px;
+    z-index: 9999;
+
+    /* Tạo lớp nền tối (Overlay) bằng thủ thuật shadow cực đại */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2),
+        0 0 0 100vmax rgba(0, 0, 0, 0.5);
+
+    animation: popupFadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-family: 'Segoe UI', sans-serif;
 }
 
+/* --- 2. Tiêu đề --- */
 .title-doi-password {
-    color: rgb(65, 4, 109);
-    width: 100%;
     text-align: center;
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 25px;
+    margin-top: 10px;
+    /* Hiệu ứng màu Gradient chữ */
+    background: linear-gradient(45deg, #fd267a, #ff6036);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
+/* --- 3. Form Layout --- */
 .form-doi-password {
-    width: 100%;
-    height: 100%;
+    position: relative;
+    /* Để định vị nút X */
 }
 
+/* Reset thẻ P để khoảng cách đều hơn */
 .form-doi-password p {
-    width: 100% !important;
-    height: auto;
-    padding: 10px 0px;
-    align-content: center;
+    margin: 0 0 15px 0;
+    padding: 0;
+    width: 100%;
 }
 
-.box-doi-password input {
-    width: 100% !important;
-    margin-bottom: 10px;
+/* --- 4. Input (Trường nhập liệu) --- */
+.box-doi-password label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.box-doi-password input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #eaebed;
+    border-radius: 12px;
+    background-color: #f9fafc;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+    transition: all 0.3s ease;
     box-sizing: border-box;
+    /* Giúp input không bị tràn lề */
+}
+
+/* Hiệu ứng khi bấm vào input */
+.box-doi-password input[type="password"]:focus {
+    border-color: #fe3c72;
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(254, 60, 114, 0.1);
+}
+
+/* --- 5. Nút Check Password / Đổi mật khẩu (Nút chính) --- */
+.form-doi-password button[name="btn_checkPassword"],
+.form-doi-password button[name="btn_RunDoiPassword"] {
+    width: 100%;
+    margin-top: 10px;
+    padding: 14px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(45deg, #fd267a, #ff6036);
+    /* Màu Tinder/FindU */
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(253, 38, 122, 0.4);
+    transition: transform 0.2s ease;
+}
+
+.form-doi-password button[name="btn_checkPassword"]:hover,
+.form-doi-password button[name="btn_RunDoiPassword"]:hover {
+    transform: translateY(-2px);
+    /* Bay lên nhẹ khi hover */
+    box-shadow: 0 8px 20px rgba(253, 38, 122, 0.5);
+}
+
+/* --- 6. Nút X (Đóng) --- */
+/* Chọn nút đầu tiên trong form (là nút X trong code PHP của bạn) */
+.form-doi-password>button:first-child {
+    position: absolute;
+    top: -65px;
+    /* Đẩy lên ngang hàng với tiêu đề */
+    right: -15px;
+    width: 32px;
+    height: 32px;
+    background: #f0f2f4;
+    border: none;
+    border-radius: 50%;
+    color: #7c7c7c;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.form-doi-password>button:first-child:hover {
+    background: #ffecec;
+    color: #fe3c72;
+    transform: rotate(90deg);
+    /* Xoay khi hover cho ngầu */
+}
+
+/* --- 7. Animation xuất hiện --- */
+@keyframes popupFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -40%) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
 }
 
 /* Footer layout*/

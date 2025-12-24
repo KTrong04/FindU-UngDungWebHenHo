@@ -1,16 +1,19 @@
 <?php
 require_once __DIR__ . '/../repositories/thanhVienRepository.php';
 require_once __DIR__ . '/../helpers/thanhVienHelper.php';
+require_once __DIR__ . '/../helpers/securityChat.php';
 
 class thanhVienController
 {
     private $repo;
     public $helper;
+    private $helperChat;
 
     public function __construct()
     {
         $this->repo = new thanhVienRepository();
         $this->helper = new thanhVienHelper();
+        $this->helperChat = new SecurityHelper();
     }
 
     // acount
@@ -430,8 +433,40 @@ class thanhVienController
                     Mô tả bản thân
                 </header>
                 <p>' . htmlspecialchars($detail['bio']) . ' </p>
-            </div>
-            <div class="info-box-infodetailes">
+            </div>';
+
+            // <div class="info-box-infodetailes">
+            //     <div class="swiper mySwiper">
+            //         <div class="swiper-wrapper">';
+            // $listImages = [];
+
+            // // Kiểm tra xem có dữ liệu hình không trước khi explode
+            // if (!empty($detail['hinh'])) {
+            //     $arrHinh = explode(',', $detail['hinh']);
+
+            //     foreach ($arrHinh as $img) {
+            //         $listImages[] = "/project-FindU/public/uploads/images/" . htmlspecialchars(trim($img));
+            //     }
+            // }
+
+            // if (!empty($listImages)) {
+            //     foreach ($listImages as $imgUrl) {
+            //         echo '<div class="swiper-slide">
+            //                 <img src="' . $imgUrl . '" alt="User Image">
+            //             </div>';
+            //     }
+            // }
+
+            // echo '</div>
+
+            //         <div class="swiper-button-next"></div>
+            //         <div class="swiper-button-prev"></div>
+
+            //         <div class="swiper-pagination"></div>
+            //     </div>
+            // </div>
+
+            echo '<div class="info-box-infodetailes">
                 <header class="box-infodetailes-title">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" role="img">
                         <title></title>
@@ -767,7 +802,9 @@ class thanhVienController
             echo $this->helper->message('error', 'Tệp tin tải lên không hợp lệ. Vui lòng chọn tệp tin hình ảnh hoặc video.');
             return;
         }
-        return $this->repo->addMessage($maCTC, $user_maTV, $maTV_chat, $message, $filesCheck);
+
+        $encryptedMessage = !empty($message) ? SecurityHelper::encrypt($message) : $message;
+        return $this->repo->addMessage($maCTC, $user_maTV, $maTV_chat, $encryptedMessage, $filesCheck);
     }
 
     public function listMessage($maCTC)

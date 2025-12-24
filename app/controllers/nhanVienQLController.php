@@ -75,9 +75,9 @@ class nhanVienQLController
 
         $password = $this->hashPassword($password);
         if ($this->repo->createNV($hoTen, $ngaySinh, $gioiTinh, $sdt, $email, $diaChi, $chucVu, $phongBan, $username, $password) === true) {
-            echo 'Thêm nhân viên mới thành công';
+            echo '<div class="alert-msg alert-success">Thêm nhân viên mới thành công</div>';
         } else {
-            echo 'Thêm nhân viên thất bại!';
+            echo '<div class="alert-msg alert-error">Thêm nhân viên thất bại!</div>';
         }
     }
 
@@ -85,7 +85,7 @@ class nhanVienQLController
     {
         $nv = $this->repo->findOne_NV($maNV);
         if (!$nv) {
-            echo 'Không tìm thấy nhân viên!';
+            echo '<div class="alert-msg alert-error">Không tìm thấy nhân viên!</div>';
             return;
         }
         $_SESSION['maNV_search'] = $nv['maNV'];

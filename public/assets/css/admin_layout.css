@@ -1,67 +1,100 @@
-* {
+/* --- THIẾT LẬP CƠ BẢN --- */
+html, body {
     margin: 0;
     padding: 0;
+    height: 100%;
+    background-color: #f4f4f9; /* Màu nền xám sáng tổng thể */
 }
 
-/* Montserrat */
-@font-face {
-    font-family: "Montserrat";
-    src: url("/project-FindU/public/assets/fonts/Montserrat-VariableFont_wght.ttf") format("truetype");
-}
-
-body {
-    font-family: 'Montserrat', sans-serif;
-    /* background-color: #8A25EF; */
-}
-
+/* --- CONTAINER CHÍNH (FLEXBOX) --- */
 .container {
-    width: 100%;    
-    height: 100vh;
     display: flex;
+    width: 100%;
+    min-height: 100vh; /* Quan trọng: Đảm bảo web luôn cao full màn hình */
 }
 
-.sidebar {
-    width: 20%;
-    height: auto;
-}
 
+/* --- CONTENT (NỘI DUNG CHÍNH) --- */
 .content {
-    width: 80%;
-    height: auto;
-}
-
-header
-{
-    width: 100%;
-    height: 50px;
+    flex-grow: 1; /* Tự động chiếm hết phần không gian còn lại */
+    width: calc(100% - 260px); /* Tính toán chiều rộng chính xác */
     display: flex;
-    align-items: center;
-    position: relative;
-    top: 0;
+    flex-direction: column;
+    padding: 10px;
+    box-sizing: border-box;
+    gap: 20px;
+    /* Padding cho nội dung bên trong */
+    /* Lưu ý: Header nằm trong này nên ta padding ở các thẻ con bên trong chứ không padding ở đây để Header tràn viền */
 }
 
-.box-header-left
-{
-    width: 75%;
-    height: 100%;
-    text-align: center;
-    align-content: center;
+/* Wrapper bao quanh các box nội dung (để cách lề cho đẹp) */
+.content > div:not(header):not(footer) {
+    padding: 30px;
 }
 
-.box-header-right
-{
-    width: 25%;
-    height: 100%;
-    border: 1px solid pink;
+/* --- RESPONSIVE (MOBILE) --- */
+/* Khi màn hình nhỏ hơn 768px (Tablet/Mobile) */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Chuyển thành giao diện dọc */
+    }
+
+    .sidebar {
+        width: 100%; /* Sidebar bung full chiều ngang */
+        min-width: 100%;
+        height: auto;
+        min-height: auto;
+    }
+
+    .content {
+        width: 100%;
+    }
+}
+
+/* --- FOOTER STYLE --- */
+footer {
+    box-sizing: border-box;
+    background: none;
+    border-top: 1px solid #e0e0e0; /* Đường kẻ mảnh ngăn cách */
+    padding: 20px 30px;
+    
+    /* Dàn trang 2 bên */
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    font-size: 13px;
+    color: #74788d; /* Màu xám trung tính chuyên nghiệp */
+    transition: margin-left 0.3s;
 }
 
+/* Phần bên trái: Copyright */
+.footer-left strong {
+    color: #1e0b5d; /* Màu tím thương hiệu */
+    font-weight: 600;
+}
 
-footer
-{
-    width: 100%;
-    height: auto;
-    background-color: beige;
+/* Phần bên phải: Version & Links */
+.footer-right {
+    display: flex;
+    gap: 20px; /* Khoảng cách giữa các mục */
+}
+
+.footer-right a {
+    text-decoration: none;
+    color: #74788d;
+    transition: color 0.3s;
+}
+
+.footer-right a:hover {
+    color: #00d2d3; /* Hover màu xanh Neon */
+}
+
+/* Responsive: Khi màn hình nhỏ thì footer gộp thành 1 cột */
+@media (max-width: 768px) {
+    footer {
+        margin-left: 0;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
 }

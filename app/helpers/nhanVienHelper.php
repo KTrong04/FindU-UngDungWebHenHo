@@ -21,7 +21,7 @@ class nhanVienHelper
     public function validate_info_NV($hoTen, $ngaySinh, $gioiTinh, $sdt, $email, $diaChi, $chucVu, $phongBan, $username, $password, $repassword)
     {
         if ($hoTen == "" || $ngaySinh == "" || $gioiTinh == "" || $sdt == "" || $email == "" || $chucVu == "" || $phongBan == "" || $username == "" || $password == "" || $repassword == "") {
-            echo "Vui lòng nhập nhập đầy đủ thông tin";
+            echo '<div class="alert-msg alert-error">Vui lòng nhập nhập đầy đủ thông tin!</div>';
             return;
         }
 

@@ -118,12 +118,11 @@ class nhanVienController
     public function searchThanhVien($maTV)
     {
         if ($maTV == "") {
-            echo "Vui lòng nhập mã thành viên cần tìm!";
+            echo "<script>alert('Vui lòng nhập mã thành viên cần tìm!');window.location.href;</script>";
             return;
         }
         $userData = $this->repo->search_One_thanhVien($maTV);
         if (!$userData) {
-            echo "Thành viên không tồn tại!";
             return;
         }
         $_SESSION['maTV_Khoa'] = $userData['maTV'];
@@ -138,10 +137,10 @@ class nhanVienController
         }
         $result = $this->repo->khoaTaiKhoanTV($maTV, $moTa, $ngayKhoa, $ngayMoKhoa);
         if ($result == true) {
-            echo $loaiKhoa . ' tài khoản thành viên thành công';
+            // echo $loaiKhoa . ' tài khoản thành viên thành công';
             return;
         } else {
-            echo $loaiKhoa . ' không thành công vui lòng thử lại sau!';
+            // echo $loaiKhoa . ' không thành công vui lòng thử lại sau!';
             return;
         }
     }
@@ -149,10 +148,10 @@ class nhanVienController
     public function moKhoaThanhVien($maTV)
     {
         if ($this->repo->moKhoaTaiKhoanTV($maTV) === true) {
-            echo 'Mở khóa tài khoản thành công';
+            echo '<div class="alert-msg alert-success">Mở khóa tài khoản thành công</div>';
             return;
         } else {
-            echo 'Mở khóa tài khoản thất bại!';
+            echo '<div class="alert-msg alert-error">Mở khóa tài khoản thất bại!</div>';
             return;
         }
     }

@@ -160,6 +160,7 @@ if (isset($_GET['maCTC']) && isset($_GET['maTV_chat'])) {
             }
 
             if (!empty($m['noiDung'])) {
+                $m['noiDung'] = SecurityHelper::decrypt($m['noiDung']);
                 echo '<div class="' . $class . '" data-id="' . $m['maTN'] . '"><span class="textMessage">' . htmlspecialchars($m['noiDung']) . '</span></div>';
             }
 
@@ -261,6 +262,7 @@ if (isset($_GET['loadMessage'])) {
             }
 
             if (!empty($m['noiDung'])) {
+                $m['noiDung'] = SecurityHelper::decrypt($m['noiDung']);
                 echo '<div class="' . $class . '" data-id="' . $m['maTN'] . '"><span class="textMessage">' . htmlspecialchars($m['noiDung']) . '</span></div>';
             }
 
