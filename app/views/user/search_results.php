@@ -6,6 +6,7 @@ include_once __DIR__ . '/../includes/config.php';
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8">
   <title><?= e($pageTitle) ?></title>
@@ -48,14 +49,14 @@ include_once __DIR__ . '/../includes/config.php';
                 <div class="filter-group">
                   <label for="filterAgeMin">Tuổi từ</label>
                   <input type="number" id="filterAgeMin" name="tuoiMin" min="18" max="100"
-                        value="<?= $ageMin !== null ? e((string)$ageMin) : '' ?>" placeholder="18">
+                    value="<?= $ageMin !== null ? e((string)$ageMin) : '' ?>" placeholder="18">
                 </div>
 
                 <!-- Tuổi Max -->
                 <div class="filter-group">
                   <label for="filterAgeMax">đến</label>
                   <input type="number" id="filterAgeMax" name="tuoiMax" min="18" max="100"
-                        value="<?= $ageMax !== null ? e((string)$ageMax) : '' ?>" placeholder="60">
+                    value="<?= $ageMax !== null ? e((string)$ageMax) : '' ?>" placeholder="60">
                 </div>
 
                 <!-- Giới tính -->
@@ -89,7 +90,7 @@ include_once __DIR__ . '/../includes/config.php';
                     <option value="Bình Định" <?= $location === 'Bình Định' ? 'selected' : '' ?>>Bình Định</option>
                     <option value="Bình Dương" <?= $location === 'Bình Dương' ? 'selected' : '' ?>>Bình Dương</option>
                     <option value="Bình Phước" <?= $location === 'Bình Phước' ? 'selected' : '' ?>>Bình Phước</option>
-                    <option value="Bình Thuận" <?= $location === 'Bình Thuận' ? 'selected' : '' ?>>Bình Thuận</option>  
+                    <option value="Bình Thuận" <?= $location === 'Bình Thuận' ? 'selected' : '' ?>>Bình Thuận</option>
                     <option value="Cà Mau" <?= $location === 'Cà Mau' ? 'selected' : '' ?>>Cà Mau</option>
                     <option value="Cao Bằng" <?= $location === 'Cao Bằng' ? 'selected' : '' ?>>Cao Bằng</option>
                     <option value="Đắk Lắk" <?= $location === 'Đắk Lắk' ? 'selected' : '' ?>>Đắk Lắk</option>
@@ -113,7 +114,7 @@ include_once __DIR__ . '/../includes/config.php';
                     <option value="Lạng Sơn" <?= $location === 'Lạng Sơn' ? 'selected' : '' ?>>Lạng Sơn</option>
                     <option value="Lào Cai" <?= $location === 'Lào Cai' ? 'selected' : '' ?>>Lào Cai</option>
                     <option value="Long An" <?= $location === 'Long An' ? 'selected' : '' ?>>Long An</option>
-                    <option value="Nam Định" <?= $location === 'Nam Định' ? 'selected' : '' ?>>Nam Định</option>  
+                    <option value="Nam Định" <?= $location === 'Nam Định' ? 'selected' : '' ?>>Nam Định</option>
                     <option value="Nghệ An" <?= $location === 'Nghệ An' ? 'selected' : '' ?>>Nghệ An</option>
                     <option value="Ninh Bình" <?= $location === 'Ninh Bình' ? 'selected' : '' ?>>Ninh Bình</option>
                     <option value="Ninh Thuận" <?= $location === 'Ninh Thuận' ? 'selected' : '' ?>>Ninh Thuận</option>
@@ -136,8 +137,8 @@ include_once __DIR__ . '/../includes/config.php';
                     <option value="Tuyên Quang" <?= $location === 'Tuyên Quang' ? 'selected' : '' ?>>Tuyên Quang</option>
                     <option value="Vĩnh Long" <?= $location === 'Vĩnh Long' ? 'selected' : '' ?>>Vĩnh Long</option>
                     <option value="Vĩnh Phúc" <?= $location === 'Vĩnh Phúc' ? 'selected' : '' ?>>Vĩnh Phúc</option>
-                    <option value="Yên Bái" <?= $location === 'Yên Bái' ? 'selected' : '' ?>>Yên Bái</option> 
-                    
+                    <option value="Yên Bái" <?= $location === 'Yên Bái' ? 'selected' : '' ?>>Yên Bái</option>
+
                   </select>
                 </div>
               </div>
@@ -147,15 +148,53 @@ include_once __DIR__ . '/../includes/config.php';
                 <label>Sở thích</label>
                 <div class="checkbox-group">
                   <?php
-                    $allHobbies = ['Du lịch','Cà phê','Đọc sách','Âm nhạc','Thể thao','Nấu ăn','Anime','Xem phim','Game','Nghệ thuật','Điện ảnh','Chụp ảnh','Thiền','Yoga','Thể hình'];
-                    foreach ($allHobbies as $hobby):
+                  $allHobbies = [
+                    'Du lịch',
+                    'Cà phê',
+                    'Đọc sách',
+                    'Âm nhạc',
+                    'Thể thao',
+                    'Nấu ăn',
+                    'Anime',
+                    'Xem phim',
+                    'Game',
+                    'Nghệ thuật',
+                    'Điện ảnh',
+                    'Chụp ảnh',
+                    'Thiền',
+                    'Yoga',
+                    'Thể hình',
+                    'Lập trình',
+                    'Cắm trại',
+                    'Leo núi',
+                    'Đạp xe',
+                    'Lướt web',
+                    'Hội họa',
+                    'Thiết kế',
+                    'Sưu tầm',
+                    'Nuôi thú cưng',
+                    'Làm vườn',
+                    'Karaoke',
+                    'Nhảy',
+                    'Chơi nhạc cụ',
+                    'Bơi lội',
+                    'Chạy bộ',
+                    'Viết blog',
+                    'DIY',
+                    'Board game',
+                    'Cờ vua',
+                    'Câu cá',
+                    'Lướt sóng',
+                    'Trượt patin'
+                  ];
+                  foreach ($allHobbies as $hobby):
                   ?>
                     <div class="checkbox-item">
                       <input type="checkbox"
-                             id="hobby_<?= str_replace(' ', '_', $hobby) ?>"
-                             name="soThich[]"
-                             value="<?= e($hobby) ?>"
-                             <?= in_array($hobby, $hobbies) ? 'checked' : '' ?>>
+                        id="hobby_<?= str_replace(' ', '_', $hobby) ?>"
+                        name="soThich[]"
+                        value="<?= e($hobby) ?>"
+                        <?= in_array($hobby, $hobbies) ? 'checked' : '' ?>>
                       <label for="hobby_<?= str_replace(' ', '_', $hobby) ?>"><?= e($hobby) ?></label>
                     </div>
                   <?php endforeach; ?>
@@ -182,20 +221,20 @@ include_once __DIR__ . '/../includes/config.php';
             <div class="result-container">
               <?php foreach ($results as $row): ?>
                 <?php
-                  $avatarFile = !empty($row['anhDaiDien']) ? $row['anhDaiDien'] : 'avatar-default.svg';
-                  // normalize path casing to match project links
-                  $avatarPath = "/project-FindU/public/uploads/avatars/" . $avatarFile;
-                  $defaultAvatar = "/project-FindU/public/uploads/avatars/avatar-default.svg";
-                  $profileHref = "/project-FindU/app/views/user/hoSo.php?id_profile=" . e($row['id']);
+                $avatarFile = !empty($row['anhDaiDien']) ? $row['anhDaiDien'] : 'avatar-default.svg';
+                // normalize path casing to match project links
+                $avatarPath = "/project-FindU/public/uploads/avatars/" . $avatarFile;
+                $defaultAvatar = "/project-FindU/public/uploads/avatars/avatar-default.svg";
+                $profileHref = "/project-FindU/app/views/user/hoSo.php?id_profile=" . e($row['id']);
                 ?>
 
                 <!-- ĐỔI class để không trùng .card của trangChu -->
                 <div class="result-card">
                   <a class="result-avatar-link" href="<?= $profileHref ?>" title="Xem hồ sơ <?= e($row['hoTen']) ?>">
                     <img class="result-avatar"
-                         src="<?= htmlspecialchars($avatarPath, ENT_QUOTES, 'UTF-8'); ?>"
-                         alt="Avatar của <?= e($row['hoTen']) ?>"
-                         onerror="this.onerror=null;this.src='<?= htmlspecialchars($defaultAvatar, ENT_QUOTES, 'UTF-8'); ?>';" />
+                      src="<?= htmlspecialchars($avatarPath, ENT_QUOTES, 'UTF-8'); ?>"
+                      alt="Avatar của <?= e($row['hoTen']) ?>"
+                      onerror="this.onerror=null;this.src='<?= htmlspecialchars($defaultAvatar, ENT_QUOTES, 'UTF-8'); ?>';" />
                   </a>
 
                   <div class="result-info">
@@ -219,7 +258,7 @@ include_once __DIR__ . '/../includes/config.php';
                       <p class="result-line"><strong>Sở thích:</strong> <?= e(strlen($row['soThich']) > 80 ? substr($row['soThich'], 0, 80) . '...' : $row['soThich']) ?></p>
                     <?php endif; ?>
 
-                    
+
                   </div>
                 </div>
               <?php endforeach; ?>
@@ -241,4 +280,5 @@ include_once __DIR__ . '/../includes/config.php';
 
   <?php include_once __DIR__ . '/../includes/js.php'; ?>
 </body>
+
 </html>
