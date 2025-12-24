@@ -180,6 +180,7 @@ class thanhVienRepository
     {
         $sql = "UPDATE thanhvien 
                 SET hoTen = :hoTen,  
+                    tuoi = :tuoi,
                     anhDaiDien = :avatar, 
                     diaChi = :diaChi,
                     soThich = :soThich,
@@ -189,6 +190,7 @@ class thanhVienRepository
                 WHERE maTV = :maTV";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':hoTen', $thanhVien->hoTen);
+        $stmt->bindParam(':tuoi', $thanhVien->tuoi);
         $stmt->bindParam(':avatar', $thanhVien->anhDaiDien);
         $stmt->bindParam(':diaChi', $thanhVien->diaChi);
         $stmt->bindParam(':soThich', $thanhVien->soThich);

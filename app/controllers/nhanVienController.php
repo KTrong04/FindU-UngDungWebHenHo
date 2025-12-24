@@ -13,7 +13,7 @@ class nhanVienController
         $this->repo = new nhanVienRepositories();
         $this->helper = new nhanVienHelper();
     }
-    
+
 
     public function dangNhap($username, $password)
     {
@@ -40,26 +40,23 @@ class nhanVienController
     public function dangXuat()
     {
         session_destroy();
-        header("Location: /project-FindU/app/views/admin/");
+        echo '<script>
+            window.location.href = "/project-FindU/app/views/admin/";
+          </script>';
+        exit();
     }
 
     public function checkPasswordNow($password, $maNV)
     {
-        if ($password != "")
-        {
+        if ($password != "") {
             $pass_db = $this->repo->find_password_now($maNV);
-            if (!password_verify($password, $pass_db['password']))
-            {
+            if (!password_verify($password, $pass_db['password'])) {
                 echo 'Mật khẩu không chính xác!';
                 return;
-            }
-            else
-            {
+            } else {
                 return true;
             }
-        }
-        else
-        {
+        } else {
             echo 'Vui lòng nhập mật khẩu hiện tại!';
             return;
         }
@@ -73,26 +70,21 @@ class nhanVienController
 
     public function doiMatKhau($maNV, $passwordnew, $repasswordnew)
     {
-        if ($passwordnew == "" || $repasswordnew == "")
-        {
+        if ($passwordnew == "" || $repasswordnew == "") {
             echo 'Vui lòng nhập đầy đủ';
             return;
         }
 
-        if ($passwordnew != $repasswordnew)
-        {
+        if ($passwordnew != $repasswordnew) {
             echo 'Mật khẩu không khớp với lòng kiểm tra lại';
             return;
         }
 
         $passwordnew = $this->hashPassword($passwordnew);
-        if ($this->repo->updateNewPassword($maNV, $passwordnew))
-        {
+        if ($this->repo->updateNewPassword($maNV, $passwordnew)) {
             echo 'Đổi mật khẩu thành công';
             return;
-        }
-        else
-        {
+        } else {
             echo 'Đổi mật khẩu thất bại';
             return;
         }
@@ -155,17 +147,14 @@ class nhanVienController
             return;
         }
     }
-    
+
     public function se_phongBan()
     {
         echo '<select name="se_phongban">';
         $phongBan = $this->repo->find_phongBan();
-        foreach($phongBan as $pb)
-        {
+        foreach ($phongBan as $pb) {
             echo '<option value="' . $pb['maPB'] . '">' . $pb['tenPB'] . '</option>';
         }
         echo '</select>';
     }
-
-
 }

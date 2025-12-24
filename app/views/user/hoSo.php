@@ -26,12 +26,13 @@
             $anhDaiDien = $_FILES['uploadAvatarProfile'];
             $hinh = $_FILES['photos'] ?? [];
             $hoTen = $_POST['profile_hoTen'];
+            $tuoi = $_POST['profile_tuoi'];
             $hocVan = $_POST['profile_hocVan'];
             $diaChi = $_POST['profile_diaChi'];
             $bio = $_POST['profile_bio'];
             $soThich = $_POST['profile_soThich'] ?? [];
 
-            $tv->capNhatHoSo($_SESSION['user_maTV'], $anhDaiDien, $hinh, $hoTen, $hocVan, $diaChi, $bio, $soThich);
+            $tv->capNhatHoSo($_SESSION['user_maTV'], $anhDaiDien, $hinh, $hoTen, $hocVan, $diaChi, $bio, $soThich, $tuoi);
           }
           echo '<div class="stage stage-hoSo">
                     <div class="cards" id="cards">';
