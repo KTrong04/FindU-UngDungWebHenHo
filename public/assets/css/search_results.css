@@ -1,86 +1,254 @@
-    body {
-      font-family: 'Segoe UI', Tahoma, sans-serif;
-      background-color: #f7f8fa;
-      margin: 0;
-      padding: 20px;
-    }
+/* =========================
+   FIX LAYOUT KHÔNG ĐÈ SIDEBAR
+   (flex item phải có min-width:0 để không overflow)
+========================= */
+.main-right{
+  flex: 1;
+  min-width: 0;
+}
 
-    h1 {
-      text-align: center;
-      color: #222;
-    }
+/* =========================
+   SCOPE: chỉ áp dụng trong trang search
+   => tránh trùng CSS của trangChu
+========================= */
+.search-page{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
 
-    form {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+.search-page .search-title{
+  font-size: 28px;
+  margin-bottom: 24px;
+  color: #111827;
+  font-weight: 800;
+}
 
-    input[type="text"] {
-      padding: 8px 12px;
-      width: 250px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
+/* ===== FILTER ===== */
+.search-page .filter-section{
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  border: 1px solid #e5e7eb;
+}
 
-    button {
-      padding: 8px 14px;
-      background-color: #ff4081;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
+.search-page .filter-title{
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  color: #111827;
+}
 
-    .result-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
+.search-page .filter-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
 
-    .card {
-      background-color: #fff;
-      width: 350px;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      overflow: hidden;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 15px;
-    }
+.search-page .filter-group{
+  display: flex;
+  flex-direction: column;
+}
 
-    .avatar {
-      flex: 0 0 100px;
-      height: 100px;
-      border-radius: 50%;
-      background-color: #f1f1f1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-right: 15px;
-      font-size: 40px;
-      color: #555;
-    }
+.search-page .filter-group label{
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #374151;
+}
 
-    .info {
-      flex: 1;
-    }
+.search-page .filter-group input[type="text"],
+.search-page .filter-group input[type="number"],
+.search-page .filter-group select{
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  background: #fff;
+}
 
-    .info h3 {
-      margin: 0 0 6px;
-      color: #333;
-      font-size: 20px;
-    }
+.search-page .filter-hobbies{
+  margin-bottom: 16px;
+}
 
-    .info p {
-      margin: 4px 0;
-      color: #666;
-      font-size: 15px;
-    }
+.search-page .checkbox-group{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+}
 
-    .no-result {
-      text-align: center;
-      color: #999;
-      margin-top: 40px;
-    }
+.search-page .checkbox-item{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-page .checkbox-item input[type="checkbox"]{
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+
+.search-page .checkbox-item label{
+  margin: 0;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 13px;
+  color: #374151;
+}
+
+.search-page .filter-actions{
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.search-page .btn-filter{
+  padding: 10px 18px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.search-page .btn-apply{
+  background: linear-gradient(90deg, #eb0052, #ec4899);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(236,72,153,.18);
+}
+
+.search-page .btn-apply:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 14px 32px rgba(236,72,153,.25);
+}
+
+.search-page .btn-clear{
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.search-page .btn-clear:hover{
+  background: #e5e7eb;
+}
+
+/* ===== RESULTS ===== */
+.search-page .result-header{
+  font-size: 14px;
+  color: #6b7280;
+  margin: 10px 0 16px;
+  font-weight: 700;
+}
+
+.search-page .result-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 20px;
+}
+
+/* Card riêng của search (không dùng .card để tránh trùng trangChu) */
+.search-page .result-card{
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  display: flex;
+  gap: 16px;
+  transition: box-shadow 0.2s, transform .2s;
+  min-width: 0;
+}
+
+.search-page .result-card:hover{
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  transform: translateY(-1px);
+}
+
+.search-page .result-avatar{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid #f3f4f6;
+  background: #f9fafb;
+}
+
+.search-page .result-info{
+  flex: 1;
+  min-width: 0;
+}
+
+.search-page .result-name{
+  margin: 0 0 6px;
+  font-size: 16px;
+  color: #111827;
+  font-weight: 900;
+}
+
+.search-page .result-line{
+  margin: 4px 0;
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+.search-page .result-line strong{
+  color: #374151;
+}
+
+.search-page .dot{
+  margin: 0 8px;
+}
+
+/* ===== BACK BUTTON (giống style dating) ===== */
+.search-page .back-center-wrap{
+  display:flex;
+  justify-content:center;
+  margin: 28px 0 8px;
+}
+
+.search-page .btn-back-love{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding: 12px 28px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #f43f5e, #ec4899);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: .2px;
+  box-shadow: 0 10px 24px rgba(236,72,153,.25);
+  transition: all .25s ease;
+}
+
+.search-page .btn-back-love:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(236,72,153,.35);
+}
+
+.search-page .btn-back-love:active{
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(236,72,153,.25);
+}
+
+.search-page .btn-back-love .icon{
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px){
+  .search-page{ padding: 14px; }
+  .search-page .result-container{ grid-template-columns: 1fr; }
+}
