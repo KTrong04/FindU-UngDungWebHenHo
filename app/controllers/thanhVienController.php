@@ -549,7 +549,45 @@ class thanhVienController
         $myHobbies = !empty($detail['soThich']) ? array_map('trim', explode(',', $detail['soThich'])) : [];
 
         // Danh sách tất cả sở thích (Bạn có thể thêm nhiều hơn)
-        $allHobbies = ['Du lịch', 'Cà phê', 'Đọc sách', 'Âm nhạc', 'Thể thao', 'Nấu ăn', 'Anime', 'Xem phim', 'Game', 'Nghệ thuật', 'Điện ảnh', 'Chụp ảnh', 'Thiền', 'Yoga', 'Thể hình', 'Mua sắm', 'Thú cưng'];
+        $allHobbies = [
+            'Du lịch',
+            'Cà phê',
+            'Đọc sách',
+            'Âm nhạc',
+            'Thể thao',
+            'Nấu ăn',
+            'Anime',
+            'Xem phim',
+            'Game',
+            'Nghệ thuật',
+            'Điện ảnh',
+            'Chụp ảnh',
+            'Thiền',
+            'Yoga',
+            'Thể hình',
+            'Lập trình',
+            'Cắm trại',
+            'Leo núi',
+            'Đạp xe',
+            'Lướt web',
+            'Hội họa',
+            'Thiết kế',
+            'Sưu tầm',
+            'Nuôi thú cưng',
+            'Làm vườn',
+            'Karaoke',
+            'Nhảy',
+            'Chơi nhạc cụ',
+            'Bơi lội',
+            'Chạy bộ',
+            'Viết blog',
+            'DIY',
+            'Board game',
+            'Cờ vua',
+            'Câu cá',
+            'Lướt sóng',
+            'Trượt patin'
+        ];
 
         echo '
                 <div id="editProfileModal" class="modal-overlay" style="display:none;">
