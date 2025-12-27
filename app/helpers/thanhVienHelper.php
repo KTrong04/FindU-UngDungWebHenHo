@@ -34,8 +34,8 @@ class thanhVienHelper
         }
 
         // Kiểm tra độ dài mật khẩu
-        if (strlen($password) < 12) {
-            return $this->message('error', 'Mật khẩu phải có ít nhất 12 ký tự.');
+        if (strlen($password) < 8) {
+            return $this->message('error', 'Mật khẩu phải có ít nhất 8 ký tự.');
         }
 
         // Kiểm tra mật khẩu nhập lại

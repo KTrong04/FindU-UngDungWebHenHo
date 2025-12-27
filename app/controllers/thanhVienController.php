@@ -241,41 +241,41 @@ class thanhVienController
 
 
 
-    // Hiển thị bài viết
-    public function hienThiBaiViet()
-    {
-        $user_maTV = $_SESSION['user_maTV'];
-        $uploadPath = $_SERVER['DOCUMENT_ROOT'] . '/Project-FindU/app/views/includes/baiViet.php';
-        foreach ($this->repo->ReadAll_BaiViet($user_maTV) as $bv) {
-            include $uploadPath;
-        }
-    }
+    // // Hiển thị bài viết
+    // public function hienThiBaiViet()
+    // {
+    //     $user_maTV = $_SESSION['user_maTV'];
+    //     $uploadPath = $_SERVER['DOCUMENT_ROOT'] . '/Project-FindU/app/views/includes/baiViet.php';
+    //     foreach ($this->repo->ReadAll_BaiViet($user_maTV) as $bv) {
+    //         include $uploadPath;
+    //     }
+    // }
 
-    public function ghepDoi($soThich, $age_min, $age_max, $gioiTinh)
-    {
-        // Kiểm tra dữ liệu đầu vào
-        if (empty($soThich) || empty($age_min) || empty($age_max) || empty($gioiTinh)) {
-            echo $this->helper->message('error', 'Vui lòng thiết lập đầy đủ thông tin.');
-            return false;
-        }
+    // public function ghepDoi($soThich, $age_min, $age_max, $gioiTinh)
+    // {
+    //     // Kiểm tra dữ liệu đầu vào
+    //     if (empty($soThich) || empty($age_min) || empty($age_max) || empty($gioiTinh)) {
+    //         echo $this->helper->message('error', 'Vui lòng thiết lập đầy đủ thông tin.');
+    //         return false;
+    //     }
 
-        // Tìm người phù hợp nhất
-        $result = $this->repo->findOne_ghepDoi($soThich, $age_min, $age_max, $gioiTinh);
+    //     // Tìm người phù hợp nhất
+    //     $result = $this->repo->findOne_ghepDoi($soThich, $age_min, $age_max, $gioiTinh);
 
-        // Xử lý kết quả
-        if ($result) {
-            echo "
-        <div class='box-result'>
-            <h3>💘 Người phù hợp nhất</h3>
-            <p><b>{$result['hoTen']}</b> ({$result['tuoi']} tuổi)</p>
-            <p><b>Sở thích:</b> {$result['soThich']}</p>
-        </div>";
-            return true;
-        } else {
-            echo $this->helper->message('error', 'Không tìm thấy người phù hợp.');
-            return false;
-        }
-    }
+    //     // Xử lý kết quả
+    //     if ($result) {
+    //         echo "
+    //     <div class='box-result'>
+    //         <h3>💘 Người phù hợp nhất</h3>
+    //         <p><b>{$result['hoTen']}</b> ({$result['tuoi']} tuổi)</p>
+    //         <p><b>Sở thích:</b> {$result['soThich']}</p>
+    //     </div>";
+    //         return true;
+    //     } else {
+    //         echo $this->helper->message('error', 'Không tìm thấy người phù hợp.');
+    //         return false;
+    //     }
+    // }
 
     public function ThemThongTinTV($maTV, $soThich, $avatar, $diaChi)
     {
@@ -342,7 +342,7 @@ class thanhVienController
         $result = $this->repo->find_goiY_ghepDoi($maTV, $gioiTinh, $tuoi, $soThich);
 
         if (empty($result)) {
-            echo '<p style="color:#fff;opacity:0.8;text-align:center;">Không có gợi ý phù hợp 😢</p>';
+            echo '<p style="color:black;opacity:0.8;text-align:center;">Không có gợi ý phù hợp 😢</p>';
             return;
         }
 
@@ -935,8 +935,6 @@ class thanhVienController
     {
         return $this->repo->check_capDoi($maTV1_user, $maTV_chat);
     }
-
-    // Trong Class Controller (Ví dụ: ThanhVienController.php)
 
     public function baoCaoThanhVien($nguoi_bao_cao_id, $nguoi_bi_bao_cao_id, $ten_nguoi_bi_bao_cao, $ly_do, $chi_tiet)
     {
